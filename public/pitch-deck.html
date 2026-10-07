@@ -1,0 +1,702 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loopin — Rumpty Cloud Hackathon Pitch Deck</title>
+    <meta
+      name="description"
+      content="Loopin turns screenshots, flyers, and messy notes into synced Google Calendar events. Pitch deck for the Rumpty Cloud hackathon."
+    />
+    <style>
+      :root {
+        --bg: #ffffff;
+        --fg: #1f1f1f;
+        --muted: #5f6368;
+        --border: #e5e7eb;
+        --surface: #ffffff;
+        --soft: #f1f3f4;
+        --primary: #0b57d0;
+        --primary-soft: #e8f0fe;
+        --accent: #0b57d0;
+        --radius: 16px;
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0f1115;
+          --fg: #e8eaed;
+          --muted: #9aa0a6;
+          --border: #2a2e35;
+          --surface: #161a20;
+          --soft: #1d2229;
+          --primary: #8ab4f8;
+          --primary-soft: rgba(138, 180, 248, 0.14);
+        }
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scroll-snap-type: y proximity;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--fg);
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          Arial,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        line-height: 1.5;
+      }
+      .slide {
+        min-height: 100vh;
+        scroll-snap-align: start;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 72px 24px;
+        border-bottom: 1px solid var(--border);
+      }
+      .wrap {
+        width: 100%;
+        max-width: 1040px;
+        margin: 0 auto;
+      }
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--primary);
+        background: var(--primary-soft);
+        padding: 6px 12px;
+        border-radius: 999px;
+      }
+      .num {
+        font-size: 12px;
+        font-weight: 600;
+        color: var(--muted);
+        letter-spacing: 0.14em;
+      }
+      h1 {
+        font-size: clamp(44px, 8vw, 96px);
+        line-height: 0.98;
+        letter-spacing: -0.03em;
+        margin: 18px 0 0;
+        font-weight: 800;
+      }
+      h2 {
+        font-size: clamp(30px, 4.6vw, 52px);
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin: 14px 0 0;
+        font-weight: 800;
+      }
+      h3 {
+        font-size: 18px;
+        margin: 0 0 6px;
+        font-weight: 650;
+      }
+      .lead {
+        font-size: clamp(17px, 2.1vw, 21px);
+        color: var(--muted);
+        margin-top: 18px;
+        max-width: 720px;
+      }
+      p {
+        color: var(--muted);
+        margin: 0;
+      }
+      .grad {
+        background: linear-gradient(100deg, var(--primary), #8ab4f8);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 26px;
+      }
+      .chip {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-size: 13px;
+        font-weight: 550;
+        color: var(--fg);
+      }
+      .grid {
+        display: grid;
+        gap: 16px;
+        margin-top: 32px;
+      }
+      .g2 {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      .g3 {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .card {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 22px;
+      }
+      .card p {
+        font-size: 14.5px;
+      }
+      .tag {
+        display: inline-block;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--primary);
+        margin-bottom: 10px;
+      }
+      .step {
+        display: flex;
+        gap: 16px;
+        align-items: flex-start;
+      }
+      .step .n {
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        border-radius: 999px;
+        background: var(--primary-soft);
+        color: var(--primary);
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        font-size: 14px;
+      }
+      .big {
+        font-size: clamp(38px, 6vw, 64px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--fg);
+      }
+      .stat p {
+        font-size: 14px;
+        margin-top: 4px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 26px;
+        font-size: 15px;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+      th {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        font-weight: 600;
+      }
+      td strong {
+        color: var(--fg);
+      }
+      td {
+        color: var(--muted);
+      }
+      .price {
+        border: 1px solid var(--border);
+        background: var(--surface);
+        border-radius: var(--radius);
+        padding: 22px;
+      }
+      .price.feature {
+        border-color: var(--primary);
+      }
+      .price .amount {
+        font-size: 34px;
+        font-weight: 800;
+        color: var(--fg);
+        letter-spacing: -0.02em;
+      }
+      ul {
+        margin: 12px 0 0;
+        padding-left: 18px;
+        color: var(--muted);
+        font-size: 14.5px;
+      }
+      li {
+        margin-bottom: 6px;
+      }
+      .footer {
+        margin-top: 34px;
+        padding-top: 22px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px 22px;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 14px;
+      }
+      .footer a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+      }
+      .kbd {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        padding: 1px 6px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .logo {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 8px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+      }
+      .logo small {
+        font-weight: 600;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      @media print {
+        .slide {
+          min-height: auto;
+          page-break-after: always;
+          border: 0;
+          padding: 40px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. COVER -->
+    <section class="slide">
+      <div class="wrap">
+        <div class="logo">loopin <small>v3.0</small></div>
+        <div class="eyebrow" style="margin-top: 28px">
+          Rumpty Cloud Hackathon · 2026
+        </div>
+        <h1>
+          Turn anything into a<br />
+          <span class="grad">synced calendar event.</span>
+        </h1>
+        <p class="lead">
+          Loopin reads screenshots, flyers, chat threads, and messy notes with
+          AI, extracts structured events, and syncs them straight to Google
+          Calendar. Capture in, calendar out.
+        </p>
+        <div class="row">
+          <span class="chip">Multimodal AI extraction</span>
+          <span class="chip">One-click Google Calendar sync</span>
+          <span class="chip">API · webhooks · reminders · teams</span>
+          <span class="chip">Free 3 / month</span>
+          <span class="chip">USD &amp; NGN</span>
+          <span class="chip">Built on Rumpty Cloud</span>
+        </div>
+        <div class="footer">
+          <span
+            >Live at
+            <a href="https://loopin.tadstech.dev">loopin.tadstech.dev</a></span
+          >
+          <span
+            >Support ·
+            <a href="mailto:motrenewed@gmail.com">motrenewed@gmail.com</a></span
+          >
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PROBLEM -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">01 — THE PROBLEM</span>
+        <h2>Event details arrive everywhere except your calendar.</h2>
+        <p class="lead">
+          Invites live in screenshots. Deadlines hide in group chats. Flyers get
+          photographed once and forgotten. Re-typing them is the tax everyone
+          pays — and things still slip.
+        </p>
+        <div class="grid g3">
+          <div class="card">
+            <span class="tag">Fragmented</span>
+            <h3>Input is unstructured</h3>
+            <p>
+              Images, PDFs, voice notes, and messy text — no consistent format
+              to parse.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Manual</span>
+            <h3>Re-typing wastes hours</h3>
+            <p>
+              Copying details into a calendar is slow, error-prone, and easy to
+              forget.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Incomplete</span>
+            <h3>Tools stop at the text layer</h3>
+            <p>
+              Notes apps capture; they don't extract dates, times, and locations
+              into something actionable.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SOLUTION -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">02 — THE SOLUTION</span>
+        <h2>Capture in. Calendar out.</h2>
+        <p class="lead">
+          One input box. Under the hood, AI does the reading, structuring, and
+          syncing — so the user does nothing but drop the thing.
+        </p>
+        <div class="grid g3" style="margin-top: 36px">
+          <div class="step">
+            <div class="n">1</div>
+            <div>
+              <h3>Drop anything</h3>
+              <p>
+                Images, screenshots, flyers, or pasted text — up to three images
+                at once.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">2</div>
+            <div>
+              <h3>AI extracts events</h3>
+              <p>
+                Title, start, end, location, notes, and a confidence score for
+                every event.
+              </p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="n">3</div>
+            <div>
+              <h3>Syncs to Google</h3>
+              <p>
+                One-click Calendar connection. Upcoming events push
+                automatically; past ones are skipped.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 34px">
+          <span class="chip">Groq · llama-3.1-8b-instant</span>
+          <span class="chip">OpenRouter free router fallback</span>
+          <span class="chip">Supabase Auth + Postgres</span>
+          <span class="chip">Next.js 16 · React 19</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PRODUCT SUITE -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">03 — THE PRODUCT SUITE</span>
+        <h2>Loopin is a platform, not a single box.</h2>
+        <p class="lead">
+          The extractor is the wedge. These products extend it into a full
+          capture-and-schedule platform — and each one maps onto a Rumpty Cloud
+          primitive.
+        </p>
+        <div class="grid g2">
+          <div class="card">
+            <span class="tag">Now · core</span>
+            <h3>Loopin Extractor</h3>
+            <p>
+              Multimodal extraction and Google Calendar sync. Live today, with
+              accounts, usage quota, and a lead-gen gate.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Next · cloud</span>
+            <h3>Loopin Inbox</h3>
+            <p>
+              Forward any email or receipt to a Loopin address. An inbound
+              webhook drops it into a job queue for async extraction.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Shipped</span>
+            <h3>Loopin API &amp; Webhooks</h3>
+            <p>
+              REST endpoints and signed webhooks so other apps can extract and
+              sync events programmatically.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Shipped</span>
+            <h3>Smart Reminders</h3>
+            <p>
+              Scheduled email and push nudges before each event, fired by a
+              managed cron and queue.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Shipped</span>
+            <h3>Shared Calendars</h3>
+            <p>
+              Team workspaces with roles and shared destinations, realtime
+              updates, row-level security.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Shipped</span>
+            <h3>Public Event Pages</h3>
+            <p>
+              Publish any extracted event as a shareable, indexable page with
+              Event structured data.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WHY RUMPTY CLOUD -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">04 — WHY RUMPTY CLOUD</span>
+        <h2>Every Loopin surface is a cloud primitive.</h2>
+        <p class="lead">
+          Loopin isn't a static site with a cloud logo on it. Async extraction,
+          scheduled reminders, media storage, and an API layer all demand real
+          infrastructure.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Product capability</th>
+              <th>Cloud primitive</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Image uploads &amp; stored artifacts</strong></td>
+              <td>Object storage + CDN</td>
+            </tr>
+            <tr>
+              <td><strong>Accounts, quotas, history</strong></td>
+              <td>Managed Postgres + row-level security</td>
+            </tr>
+            <tr>
+              <td><strong>Async extraction jobs</strong></td>
+              <td>Background queue + workers</td>
+            </tr>
+            <tr>
+              <td><strong>Smart Reminders</strong></td>
+              <td>Scheduled cron + notification delivery</td>
+            </tr>
+            <tr>
+              <td><strong>Inbox ingestion</strong></td>
+              <td>Inbound webhooks + signed verification</td>
+            </tr>
+            <tr>
+              <td><strong>API &amp; webhooks</strong></td>
+              <td>Edge functions + secrets management</td>
+            </tr>
+            <tr>
+              <td><strong>Live event updates</strong></td>
+              <td>Realtime subscriptions</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 6. MARKET & MODEL -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">05 — MARKET &amp; BUSINESS MODEL</span>
+        <h2>Free to start. Priced for where the growth is.</h2>
+        <p class="lead">
+          Millions of knowledge workers and small teams re-type event details
+          weekly. Loopin converts them with a genuinely useful free tier and
+          dual-currency pricing for global and Nigerian markets.
+        </p>
+        <div class="grid g3" style="margin-top: 34px">
+          <div class="price">
+            <span class="tag">Free</span>
+            <div class="amount">$0</div>
+            <ul>
+              <li>3 extractions / month</li>
+              <li>Bring your own keys</li>
+              <li>No card required</li>
+            </ul>
+          </div>
+          <div class="price feature">
+            <span class="tag">Pro · most popular</span>
+            <div class="amount">$5 / ₦7,500</div>
+            <ul>
+              <li>Unlimited extractions</li>
+              <li>One-click Calendar sync</li>
+              <li>Saved history</li>
+              <li>Managed AI, no keys</li>
+            </ul>
+          </div>
+          <div class="price">
+            <span class="tag">Team</span>
+            <div class="amount">$19 / ₦28,500</div>
+            <ul>
+              <li>Up to 5 seats</li>
+              <li>Shared destinations</li>
+              <li>Centralised billing</li>
+            </ul>
+          </div>
+        </div>
+        <div class="row" style="margin-top: 28px">
+          <span class="chip">Merchant-of-record checkout</span>
+          <span class="chip">Cards · bank transfer · USSD</span>
+          <span class="chip">USD + NGN</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. EDGE -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">06 — WHY LOOPIN WINS</span>
+        <h2>End-to-end, multimodal, and actually free to try.</h2>
+        <div class="grid g3">
+          <div class="card">
+            <span class="tag">Depth</span>
+            <h3>Capture → extract → sync</h3>
+            <p>
+              Most tools stop at capture or stop at text. Loopin finishes the
+              job in one flow.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Friction</span>
+            <h3>Google-first, one-click</h3>
+            <p>
+              Sign in with Google, connect Calendar in a single click, and
+              extraction works instantly.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Reach</span>
+            <h3>Local pricing, global product</h3>
+            <p>
+              NGN alongside USD, USSD and bank transfer alongside cards — built
+              for markets others ignore.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Resilience</span>
+            <h3>Provider failover</h3>
+            <p>
+              Groq first, OpenRouter free router as automatic fallback — no
+              single point of failure.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Craft</span>
+            <h3>Considered UX</h3>
+            <p>
+              System dark/light theming, accessible dialogs and tabs, a PWA
+              shell, and a calm interface.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Data</span>
+            <h3>Secure by default</h3>
+            <p>
+              OAuth tokens stored server-side only, row-level security on every
+              table, secrets never shipped to the browser.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. ROADMAP -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">07 — ROADMAP</span>
+        <h2>From a great box to a platform.</h2>
+        <div class="grid g3" style="margin-top: 32px">
+          <div class="card">
+            <span class="tag">Phase 1 · ship</span>
+            <h3>Inbox + API</h3>
+            <p>
+              Email ingestion on a queue, plus REST endpoints and signed
+              webhooks.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Phase 2 · teams</span>
+            <h3>Shared Calendars + Reminders</h3>
+            <p>
+              Team workspaces with roles, and scheduled reminders on managed
+              cron.
+            </p>
+          </div>
+          <div class="card">
+            <span class="tag">Phase 3 · expand</span>
+            <h3>Receipts + Event Pages</h3>
+            <p>
+              Extract expenses from receipts, publish shareable event pages from
+              storage.
+            </p>
+          </div>
+        </div>
+        <p class="lead" style="margin-top: 30px">
+          The core stays solid throughout: capture → extract → sync, with
+          provider failover, quota enforcement, and a genuinely usable free
+          tier.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. CTA -->
+    <section class="slide">
+      <div class="wrap">
+        <span class="num">08 — TRY IT</span>
+        <h2>The fastest way from a screenshot to a scheduled event.</h2>
+        <p class="lead">
+          Loopin is live and free to try — three extractions a month, no card
+          required.
+        </p>
+        <div class="row" style="margin-top: 30px">
+          <span class="chip">loopin.tadstech.dev</span>
+          <span class="chip">Support: motrenewed@gmail.com</span>
+          <span class="chip">Built on Rumpty Cloud</span>
+        </div>
+        <div class="footer">
+          <span class="logo">loopin <small>v3.0</small></span>
+          <span>
+            Contact ·
+            <a href="mailto:motrenewed@gmail.com">motrenewed@gmail.com</a>
+          </span>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

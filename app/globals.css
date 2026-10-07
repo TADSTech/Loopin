@@ -1,0 +1,157 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light dark;
+
+  /* Core palette (design.md) — light theme */
+  --background: #ffffff;
+  --foreground: #1f1f1f;
+
+  --primary: #0b57d0;
+  --primary-hover: #0a4fbc;
+  --primary-soft: #e8f0fe;
+  --primary-border: #c6dafc;
+  --on-primary: #ffffff;
+
+  --secondary: #1f1f1f;
+  --tertiary: #5f6368;
+  --muted: #5f6368;
+
+  --surface: #ffffff;
+  --surface-muted: #f1f3f4;
+  --border: #e5e7eb;
+  --border-strong: #dadce0;
+
+  --error: #d93025;
+  --error-soft: #fce8e6;
+  --error-border: #f6c7c1;
+
+  --overlay: rgba(32, 33, 36, 0.6);
+  --search-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
+}
+
+/* Dark theme — applied automatically from the user's system preference */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #131314;
+    --foreground: #e8eaed;
+
+    --primary: #8ab4f8;
+    --primary-hover: #aecbfa;
+    --primary-soft: rgba(138, 180, 248, 0.16);
+    --primary-border: rgba(138, 180, 248, 0.4);
+    --on-primary: #202124;
+
+    --secondary: #e8eaed;
+    --tertiary: #9aa0a6;
+    --muted: #9aa0a6;
+
+    --surface: #1f1f1f;
+    --surface-muted: #303134;
+    --border: #3c4043;
+    --border-strong: #5f6368;
+
+    --error: #f28b82;
+    --error-soft: rgba(242, 139, 130, 0.15);
+    --error-border: rgba(242, 139, 130, 0.4);
+
+    --overlay: rgba(0, 0, 0, 0.6);
+    --search-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-border: var(--primary-border);
+  --color-on-primary: var(--on-primary);
+  --color-secondary: var(--secondary);
+  --color-tertiary: var(--tertiary);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-error: var(--error);
+  --color-error-soft: var(--error-soft);
+  --color-error-border: var(--error-border);
+  --color-overlay: var(--overlay);
+
+  --font-sans: var(--font-roboto);
+  --font-display: var(--font-roboto);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background-color: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-roboto), Roboto, Arial, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--primary-soft);
+  color: var(--primary);
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.2s ease-out;
+}
+
+@keyframes logo-rainbow {
+  from {
+    filter: drop-shadow(0 0 8px #ff3b30) hue-rotate(0deg);
+  }
+  to {
+    filter: drop-shadow(0 0 8px #ff3b30) hue-rotate(360deg);
+  }
+}
+
+.animate-logo-rainbow {
+  animation: logo-rainbow 1.6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in,
+  .animate-scale-in,
+  .animate-logo-rainbow {
+    animation: none;
+  }
+}

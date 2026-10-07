@@ -1,0 +1,670 @@
+{
+  "developers@320": {
+    "vw": 320,
+    "vh": 900,
+    "scrollWidth": 320,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+        "w": 83,
+        "h": 40
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"About\"",
+        "w": 37,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+        "w": 45,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+        "w": 39,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 8,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+      "w": 320,
+      "left": 0,
+      "maxWidth": "1024px",
+      "padL": "16px",
+      "padR": "16px",
+      "sideSpace": 0
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 491,
+      "b": 539,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 768,
+      "b": 900,
+      "w": 288,
+      "h": 132,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "developers@375": {
+    "vw": 375,
+    "vh": 900,
+    "scrollWidth": 375,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+        "w": 83,
+        "h": 40
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"About\"",
+        "w": 37,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+        "w": 45,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+        "w": 39,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 8,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+      "w": 375,
+      "left": 0,
+      "maxWidth": "1024px",
+      "padL": "16px",
+      "padR": "16px",
+      "sideSpace": 0
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 491,
+      "b": 539,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 768,
+      "b": 900,
+      "w": 343,
+      "h": 132,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "developers@768": {
+    "vw": 768,
+    "vh": 900,
+    "scrollWidth": 768,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": true
+      },
+      {
+        "text": "About",
+        "shown": true
+      },
+      {
+        "text": "Pricing",
+        "shown": true
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+      "w": 768,
+      "left": 0,
+      "maxWidth": "1024px",
+      "padL": "24px",
+      "padR": "24px",
+      "sideSpace": 0
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 527,
+      "b": 575,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 720,
+      "h": 60,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "developers@1024": {
+    "vw": 1024,
+    "vh": 900,
+    "scrollWidth": 1024,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": true
+      },
+      {
+        "text": "About",
+        "shown": true
+      },
+      {
+        "text": "Pricing",
+        "shown": true
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+      "w": 1024,
+      "left": 0,
+      "maxWidth": "1024px",
+      "padL": "24px",
+      "padR": "24px",
+      "sideSpace": 0
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 527,
+      "b": 575,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "developers@1280": {
+    "vw": 1280,
+    "vh": 900,
+    "scrollWidth": 1280,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": true
+      },
+      {
+        "text": "About",
+        "shown": true
+      },
+      {
+        "text": "Pricing",
+        "shown": true
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+      "w": 1024,
+      "left": 128,
+      "maxWidth": "1024px",
+      "padL": "24px",
+      "padR": "24px",
+      "sideSpace": 256
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 527,
+      "b": 575,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "developers@1440": {
+    "vw": 1440,
+    "vh": 900,
+    "scrollWidth": 1440,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": true
+      },
+      {
+        "text": "About",
+        "shown": true
+      },
+      {
+        "text": "Pricing",
+        "shown": true
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+      "w": 1024,
+      "left": 208,
+      "maxWidth": "1024px",
+      "padL": "24px",
+      "padR": "24px",
+      "sideSpace": 416
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 527,
+      "b": 575,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "developers@1920": {
+    "vw": 1920,
+    "vh": 900,
+    "scrollWidth": 1920,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": true
+      },
+      {
+        "text": "About",
+        "shown": true
+      },
+      {
+        "text": "Pricing",
+        "shown": true
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+      "w": 1024,
+      "left": 448,
+      "maxWidth": "1024px",
+      "padL": "24px",
+      "padR": "24px",
+      "sideSpace": 896
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 527,
+      "b": 575,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "developers@2560": {
+    "vw": 2560,
+    "vh": 900,
+    "scrollWidth": 2560,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": true
+      },
+      {
+        "text": "About",
+        "shown": true
+      },
+      {
+        "text": "Pricing",
+        "shown": true
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+      "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+      "w": 1024,
+      "left": 768,
+      "maxWidth": "1024px",
+      "padL": "24px",
+      "padR": "24px",
+      "sideSpace": 1536
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 527,
+      "b": 575,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  }
+}

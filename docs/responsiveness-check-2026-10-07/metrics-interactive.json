@@ -1,0 +1,1093 @@
+{
+  "results": {
+    "results@320": {
+      "vw": 320,
+      "vh": 900,
+      "scrollWidth": 320,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": false
+        },
+        {
+          "text": "About",
+          "shown": false
+        },
+        {
+          "text": "Pricing",
+          "shown": false
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 1,
+          "template": "288px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [
+        {
+          "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+          "w": 87,
+          "h": 24
+        },
+        {
+          "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+          "w": 83,
+          "h": 40
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+          "w": 38,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"About\"",
+          "w": 37,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+          "w": 43,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+          "w": 49,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+          "w": 45,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+          "w": 39,
+          "h": 20
+        }
+      ],
+      "smallTargetsTotal": 8,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+        "w": 320,
+        "left": 0,
+        "maxWidth": "1024px",
+        "padL": "16px",
+        "padR": "16px",
+        "sideSpace": 0
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 552,
+        "b": 600,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 768,
+        "b": 900,
+        "w": 288,
+        "h": 132,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "results@375": {
+      "vw": 375,
+      "vh": 900,
+      "scrollWidth": 375,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": false
+        },
+        {
+          "text": "About",
+          "shown": false
+        },
+        {
+          "text": "Pricing",
+          "shown": false
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 1,
+          "template": "343px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [
+        {
+          "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+          "w": 87,
+          "h": 24
+        },
+        {
+          "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+          "w": 83,
+          "h": 40
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+          "w": 38,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"About\"",
+          "w": 37,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+          "w": 43,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+          "w": 49,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+          "w": 45,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+          "w": 39,
+          "h": 20
+        }
+      ],
+      "smallTargetsTotal": 8,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+        "w": 375,
+        "left": 0,
+        "maxWidth": "1024px",
+        "padL": "16px",
+        "padR": "16px",
+        "sideSpace": 0
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 552,
+        "b": 600,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 768,
+        "b": 900,
+        "w": 343,
+        "h": 132,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "results@768": {
+      "vw": 768,
+      "vh": 900,
+      "scrollWidth": 768,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": true
+        },
+        {
+          "text": "About",
+          "shown": true
+        },
+        {
+          "text": "Pricing",
+          "shown": true
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 2,
+          "template": "354px 354px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [],
+      "smallTargetsTotal": 0,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+        "w": 768,
+        "left": 0,
+        "maxWidth": "1024px",
+        "padL": "24px",
+        "padR": "24px",
+        "sideSpace": 0
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 532,
+        "b": 580,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 840,
+        "b": 900,
+        "w": 720,
+        "h": 60,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "results@1024": {
+      "vw": 1024,
+      "vh": 900,
+      "scrollWidth": 1024,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": true
+        },
+        {
+          "text": "About",
+          "shown": true
+        },
+        {
+          "text": "Pricing",
+          "shown": true
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 2,
+          "template": "482px 482px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [],
+      "smallTargetsTotal": 0,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+        "w": 1024,
+        "left": 0,
+        "maxWidth": "1024px",
+        "padL": "24px",
+        "padR": "24px",
+        "sideSpace": 0
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 516,
+        "b": 564,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 840,
+        "b": 900,
+        "w": 976,
+        "h": 60,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "results@1440": {
+      "vw": 1440,
+      "vh": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": true
+        },
+        {
+          "text": "About",
+          "shown": true
+        },
+        {
+          "text": "Pricing",
+          "shown": true
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 2,
+          "template": "482px 482px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [],
+      "smallTargetsTotal": 0,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+        "w": 1024,
+        "left": 208,
+        "maxWidth": "1024px",
+        "padL": "24px",
+        "padR": "24px",
+        "sideSpace": 416
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 516,
+        "b": 564,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 840,
+        "b": 900,
+        "w": 976,
+        "h": 60,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "modal-info@1440": {
+      "vw": 1440,
+      "vh": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"1\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"2\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"3\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"4\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": true
+        },
+        {
+          "text": "About",
+          "shown": true
+        },
+        {
+          "text": "Pricing",
+          "shown": true
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 2,
+          "template": "482px 482px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [],
+      "smallTargetsTotal": 0,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+        "w": 1024,
+        "left": 208,
+        "maxWidth": "1024px",
+        "padL": "24px",
+        "padR": "24px",
+        "sideSpace": 416
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 516,
+        "b": 564,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 840,
+        "b": 900,
+        "w": 976,
+        "h": 60,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "modal-info@768": {
+      "vw": 768,
+      "vh": 900,
+      "scrollWidth": 768,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"1\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"2\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"3\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"4\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": true
+        },
+        {
+          "text": "About",
+          "shown": true
+        },
+        {
+          "text": "Pricing",
+          "shown": true
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 2,
+          "template": "354px 354px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [],
+      "smallTargetsTotal": 0,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+        "w": 768,
+        "left": 0,
+        "maxWidth": "1024px",
+        "padL": "24px",
+        "padR": "24px",
+        "sideSpace": 0
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 532,
+        "b": 580,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 840,
+        "b": 900,
+        "w": 720,
+        "h": 60,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "modal-info@375": {
+      "vw": 375,
+      "vh": 900,
+      "scrollWidth": 375,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        },
+        {
+          "el": "span.rounded-full.bg-primary-soft.px-2.py-0.5.text-[10px].font-medium | \"95% match\"",
+          "fs": 10
+        },
+        {
+          "el": "p.mt-2.border-t.border-border.pt-2.text-[11px].leading-normal | \"Bring the roadmap. Timezone assumed to be UTC as p\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"1\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"2\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"3\"",
+          "fs": 11
+        },
+        {
+          "el": "span.flex.h-6.w-6.flex-shrink-0.items-center.justify-center | \"4\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": false
+        },
+        {
+          "text": "About",
+          "shown": false
+        },
+        {
+          "text": "Pricing",
+          "shown": false
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [
+        {
+          "el": "div.grid.gap-3.sm:grid-cols-2 | \"Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop\"",
+          "cols": 1,
+          "template": "343px"
+        }
+      ],
+      "media": [],
+      "smallTargets": [
+        {
+          "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+          "w": 87,
+          "h": 24
+        },
+        {
+          "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+          "w": 83,
+          "h": 40
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+          "w": 38,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"About\"",
+          "w": 37,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+          "w": 43,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+          "w": 49,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+          "w": 45,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+          "w": 39,
+          "h": 20
+        },
+        {
+          "el": "button.rounded-full.p-1.text-tertiary.transition-colors.hover:bg-surface-muted.hover:text-foreground",
+          "w": 28,
+          "h": 28
+        },
+        {
+          "el": "button#tab-product.flex-1.rounded-full.py-2.text-sm.font-medium.transition-colors | \"Get started\"",
+          "w": 143,
+          "h": 36
+        },
+        {
+          "el": "button#tab-free.flex-1.rounded-full.py-2.text-sm.font-medium.transition-colors | \"Free & self-host\"",
+          "w": 143,
+          "h": 36
+        },
+        {
+          "el": "a.text-sm.font-medium.text-primary.hover:underline | \"See pricing \u2192\"",
+          "w": 293,
+          "h": 20
+        }
+      ],
+      "smallTargetsTotal": 12,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+        "w": 375,
+        "left": 0,
+        "maxWidth": "1024px",
+        "padL": "16px",
+        "padR": "16px",
+        "sideSpace": 0
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 552,
+        "b": 600,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 768,
+        "b": 900,
+        "w": 343,
+        "h": 132,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "modal-auth@375": {
+      "vw": 375,
+      "vh": 900,
+      "scrollWidth": 375,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": false
+        },
+        {
+          "text": "About",
+          "shown": false
+        },
+        {
+          "text": "Pricing",
+          "shown": false
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [],
+      "media": [],
+      "smallTargets": [
+        {
+          "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+          "w": 87,
+          "h": 24
+        },
+        {
+          "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+          "w": 83,
+          "h": 40
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+          "w": 38,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"About\"",
+          "w": 37,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+          "w": 43,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+          "w": 49,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+          "w": 45,
+          "h": 20
+        },
+        {
+          "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+          "w": 39,
+          "h": 20
+        },
+        {
+          "el": "button.rounded-full.p-1.text-tertiary.transition-colors.hover:bg-surface-muted.hover:text-foreground",
+          "w": 28,
+          "h": 28
+        },
+        {
+          "el": "button.font-medium.text-primary.hover:underline.cursor-pointer | \"Sign in with email\"",
+          "w": 95,
+          "h": 16
+        }
+      ],
+      "smallTargetsTotal": 10,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+        "w": 375,
+        "left": 0,
+        "maxWidth": "1024px",
+        "padL": "16px",
+        "padR": "16px",
+        "sideSpace": 0
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 491,
+        "b": 539,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 768,
+        "b": 900,
+        "w": 343,
+        "h": 132,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    },
+    "modal-auth@1440": {
+      "vw": 1440,
+      "vh": 900,
+      "scrollWidth": 1440,
+      "scrollHeight": 900,
+      "overflowPx": 0,
+      "overflowOffenders": [],
+      "textOverflow": [],
+      "tinyFonts": [
+        {
+          "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+          "fs": 11
+        }
+      ],
+      "headerLinks": [
+        {
+          "text": "How it works",
+          "shown": true
+        },
+        {
+          "text": "About",
+          "shown": true
+        },
+        {
+          "text": "Pricing",
+          "shown": true
+        }
+      ],
+      "headerControls": [
+        "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "button.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"How it works\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"About\"",
+        "a.hidden.h-10.items-center.rounded-full.px-4.text-sm | \"Pricing\"",
+        "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+      ],
+      "hasHamburger": false,
+      "grids": [],
+      "media": [],
+      "smallTargets": [],
+      "smallTargetsTotal": 0,
+      "shellInfo": {
+        "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 How it works About Pricing Sign in Tur\"",
+        "w": 1024,
+        "left": 208,
+        "maxWidth": "1024px",
+        "padL": "24px",
+        "padR": "24px",
+        "sideSpace": 416
+      },
+      "cta": {
+        "label": "Extract & sync",
+        "t": 527,
+        "b": 575,
+        "w": 160,
+        "h": 48,
+        "aboveFold": true
+      },
+      "signIn": {
+        "label": "Sign in",
+        "t": 16,
+        "b": 56,
+        "w": 83,
+        "h": 40,
+        "aboveFold": true
+      },
+      "footer": {
+        "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+        "t": 840,
+        "b": 900,
+        "w": 976,
+        "h": 60,
+        "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+      }
+    }
+  },
+  "notes": [
+    "submit -> loading state entered",
+    "extraction finished",
+    "body after extraction: Skip to main content loopin v3.0 Sign in Turn screenshots and notes into calendar events with Loopin Events extracted Extracted 1 event. Sign up to sync these to Google Calendar. EXTRACTED EVENTS Team sync 95% match 2026-10-09T15:00:00Z Cafe Loop, 12 Main St Bring the roadmap. Timezone assumed to be UTC as per instructions. Unlock your 1 extracted event Create a free account to reveal the results, auto-sync to Google Calendar, and keep your event history. Includes 3 free extractions every month.",
+    "info modal opened + resized 1440->375",
+    "auth body: Skip to main content loopin v3.0 How it works About Pricing Sign in Turn screenshots and notes into calendar events with Loopin loopin Extract & sync Home About \u00a9 2026 loopin Pricing Support Privacy Terms Continue with Google The fastest way to extract events and sync them to your calendar. 3 free AI extractions every month One-click Google Calendar sync Saved event history you can revisit No API "
+  ]
+}

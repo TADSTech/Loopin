@@ -1,0 +1,1512 @@
+{
+  "about@320": {
+    "vw": 320,
+    "vh": 900,
+    "scrollWidth": 320,
+    "scrollHeight": 1909,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 1,
+        "template": "288px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\"",
+        "w": 106,
+        "h": 40
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 5,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 320,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1849,
+      "b": 1909,
+      "w": 288,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "about@375": {
+    "vw": 375,
+    "vh": 900,
+    "scrollWidth": 375,
+    "scrollHeight": 1714,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 1,
+        "template": "343px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\"",
+        "w": 106,
+        "h": 40
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 5,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 375,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1654,
+      "b": 1714,
+      "w": 343,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "about@768": {
+    "vw": 768,
+    "vh": 900,
+    "scrollWidth": 768,
+    "scrollHeight": 1149,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 3,
+        "template": "229.328px 229.328px 229.328px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 768,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1089,
+      "b": 1149,
+      "w": 720,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "about@1024": {
+    "vw": 1024,
+    "vh": 900,
+    "scrollWidth": 1024,
+    "scrollHeight": 1149,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 3,
+        "template": "229.328px 229.328px 229.328px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 1024,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1089,
+      "b": 1149,
+      "w": 720,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "about@1280": {
+    "vw": 1280,
+    "vh": 900,
+    "scrollWidth": 1280,
+    "scrollHeight": 1149,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 3,
+        "template": "229.328px 229.328px 229.328px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 1280,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1089,
+      "b": 1149,
+      "w": 720,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "about@1440": {
+    "vw": 1440,
+    "vh": 900,
+    "scrollWidth": 1440,
+    "scrollHeight": 1149,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 3,
+        "template": "229.328px 229.328px 229.328px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 1440,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1089,
+      "b": 1149,
+      "w": 720,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "about@1920": {
+    "vw": 1920,
+    "vh": 900,
+    "scrollWidth": 1920,
+    "scrollHeight": 1149,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 3,
+        "template": "229.328px 229.328px 229.328px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 1920,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1089,
+      "b": 1149,
+      "w": 720,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "about@2560": {
+    "vw": 2560,
+    "vh": 900,
+    "scrollWidth": 2560,
+    "scrollHeight": 1149,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.gap-4.sm:grid-cols-3 | \"Drop anything Screenshots, event flyers, group-cha\"",
+        "cols": 3,
+        "template": "229.328px 229.328px 229.328px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app AI calendar extraction tha\"",
+      "w": 2560,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1089,
+      "b": 1149,
+      "w": 720,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Support Pricing Home"
+    }
+  },
+  "pricing@320": {
+    "vw": 320,
+    "vh": 900,
+    "scrollWidth": 320,
+    "scrollHeight": 1832,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 1,
+        "template": "288px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\"",
+        "w": 106,
+        "h": 40
+      },
+      {
+        "el": "button.min-w-[92px].rounded-full.px-4.py-1.5.text-sm.font-medium | \"$ USD\"",
+        "w": 92,
+        "h": 32
+      },
+      {
+        "el": "button.min-w-[92px].rounded-full.px-4.py-1.5.text-sm.font-medium | \"\u20a6 NGN\"",
+        "w": 92,
+        "h": 32
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+        "w": 45,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+        "w": 39,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 8,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 320,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1740,
+      "b": 1832,
+      "w": 288,
+      "h": 92,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "pricing@375": {
+    "vw": 375,
+    "vh": 900,
+    "scrollWidth": 375,
+    "scrollHeight": 1680,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 1,
+        "template": "343px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\"",
+        "w": 106,
+        "h": 40
+      },
+      {
+        "el": "button.min-w-[92px].rounded-full.px-4.py-1.5.text-sm.font-medium | \"$ USD\"",
+        "w": 92,
+        "h": 32
+      },
+      {
+        "el": "button.min-w-[92px].rounded-full.px-4.py-1.5.text-sm.font-medium | \"\u20a6 NGN\"",
+        "w": 92,
+        "h": 32
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+        "w": 45,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+        "w": 39,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 8,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 375,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 1620,
+      "b": 1680,
+      "w": 343,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "pricing@768": {
+    "vw": 768,
+    "vh": 900,
+    "scrollWidth": 768,
+    "scrollHeight": 943,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 3,
+        "template": "229.328px 229.328px 229.328px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 768,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 883,
+      "b": 943,
+      "w": 720,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "pricing@1024": {
+    "vw": 1024,
+    "vh": 900,
+    "scrollWidth": 1024,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 3,
+        "template": "314.656px 314.672px 314.656px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 1024,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "pricing@1280": {
+    "vw": 1280,
+    "vh": 900,
+    "scrollWidth": 1280,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 3,
+        "template": "314.656px 314.672px 314.656px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 1280,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "pricing@1440": {
+    "vw": 1440,
+    "vh": 900,
+    "scrollWidth": 1440,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 3,
+        "template": "314.656px 314.672px 314.656px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 1440,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "pricing@1920": {
+    "vw": 1920,
+    "vh": 900,
+    "scrollWidth": 1920,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 3,
+        "template": "314.656px 314.672px 314.656px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 1920,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "pricing@2560": {
+    "vw": 2560,
+    "vh": 900,
+    "scrollWidth": 2560,
+    "scrollHeight": 900,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      },
+      {
+        "el": "span.absolute.-top-3.left-6.rounded-full.bg-primary.px-3 | \"Most popular\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "a.flex.h-10.items-center.rounded-full.px-4.text-sm | \"Back to app\""
+    ],
+    "hasHamburger": false,
+    "grids": [
+      {
+        "el": "div.mt-8.grid.w-full.gap-4.sm:grid-cols-3 | \"Free Try the magic with your own keys. $0 Preview \"",
+        "cols": 3,
+        "template": "314.656px 314.672px 314.656px"
+      }
+    ],
+    "media": [],
+    "smallTargets": [],
+    "smallTargetsTotal": 0,
+    "shellInfo": {
+      "el": "main#main-content.relative.flex.min-h-dvh.flex-col.bg-background.text-foreground | \"loopin v3.0 Back to app Simple, honest pricing Pay\"",
+      "w": 2560,
+      "left": 0,
+      "maxWidth": "none",
+      "padL": "0px",
+      "padR": "0px",
+      "sideSpace": 0
+    },
+    "cta": null,
+    "signIn": null,
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 840,
+      "b": 900,
+      "w": 976,
+      "h": 60,
+      "text": "\u00a9 2026 loopin Home Support Privacy Terms"
+    }
+  },
+  "portrait-320x568": {
+    "vw": 320,
+    "vh": 568,
+    "scrollWidth": 320,
+    "scrollHeight": 568,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+        "w": 83,
+        "h": 40
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"About\"",
+        "w": 37,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+        "w": 45,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+        "w": 39,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 8,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+      "w": 320,
+      "left": 0,
+      "maxWidth": "1024px",
+      "padL": "16px",
+      "padR": "16px",
+      "sideSpace": 0
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 325,
+      "b": 373,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 436,
+      "b": 568,
+      "w": 288,
+      "h": 132,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "portrait-375x667": {
+    "vw": 375,
+    "vh": 667,
+    "scrollWidth": 375,
+    "scrollHeight": 667,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+        "w": 83,
+        "h": 40
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"About\"",
+        "w": 37,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+        "w": 45,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+        "w": 39,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 8,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+      "w": 375,
+      "left": 0,
+      "maxWidth": "1024px",
+      "padL": "16px",
+      "padR": "16px",
+      "sideSpace": 0
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 375,
+      "b": 423,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 535,
+      "b": 667,
+      "w": 343,
+      "h": 132,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  },
+  "portrait-390x844": {
+    "vw": 390,
+    "vh": 844,
+    "scrollWidth": 390,
+    "scrollHeight": 844,
+    "overflowPx": 0,
+    "overflowOffenders": [],
+    "textOverflow": [],
+    "tinyFonts": [
+      {
+        "el": "span.text-[11px].font-medium.text-tertiary | \"v3.0\"",
+        "fs": 11
+      }
+    ],
+    "headerLinks": [
+      {
+        "text": "How it works",
+        "shown": false
+      },
+      {
+        "text": "About",
+        "shown": false
+      },
+      {
+        "text": "Pricing",
+        "shown": false
+      }
+    ],
+    "headerControls": [
+      "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+      "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\""
+    ],
+    "hasHamburger": false,
+    "grids": [],
+    "media": [],
+    "smallTargets": [
+      {
+        "el": "a.flex.items-baseline.gap-2 | \"loopin v3.0\"",
+        "w": 87,
+        "h": 24
+      },
+      {
+        "el": "button.flex.h-10.items-center.rounded-full.bg-primary.px-5 | \"Sign in\"",
+        "w": 83,
+        "h": 40
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Home\"",
+        "w": 38,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"About\"",
+        "w": 37,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Pricing\"",
+        "w": 43,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Support\"",
+        "w": 49,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Privacy\"",
+        "w": 45,
+        "h": 20
+      },
+      {
+        "el": "a.transition-colors.hover:text-foreground | \"Terms\"",
+        "w": 39,
+        "h": 20
+      }
+    ],
+    "smallTargetsTotal": 8,
+    "shellInfo": {
+      "el": "form.relative.z-10.mx-auto.flex.min-h-dvh.w-full | \"loopin v3.0 Sign in Turn screenshots and notes int\"",
+      "w": 390,
+      "left": 0,
+      "maxWidth": "1024px",
+      "padL": "16px",
+      "padR": "16px",
+      "sideSpace": 0
+    },
+    "cta": {
+      "label": "Extract & sync",
+      "t": 483,
+      "b": 531,
+      "w": 160,
+      "h": 48,
+      "aboveFold": true
+    },
+    "signIn": {
+      "label": "Sign in",
+      "t": 16,
+      "b": 56,
+      "w": 83,
+      "h": 40,
+      "aboveFold": true
+    },
+    "footer": {
+      "el": "footer.flex.flex-wrap.items-center.justify-between.gap-3.py-",
+      "t": 752,
+      "b": 844,
+      "w": 358,
+      "h": 92,
+      "text": "Home About \u00a9 2026 loopin Pricing Support Privacy Terms"
+    }
+  }
+}
