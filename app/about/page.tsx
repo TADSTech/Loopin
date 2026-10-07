@@ -168,6 +168,18 @@ export default function AboutPage() {
             >
               Home
             </Link>
+            <Link
+              href="/privacy"
+              className="inline-flex min-h-11 min-w-11 md:min-h-0 md:min-w-0 items-center justify-center transition-colors hover:text-foreground"
+            >
+              Privacy
+            </Link>
+            <Link
+              href="/terms"
+              className="inline-flex min-h-11 min-w-11 md:min-h-0 md:min-w-0 items-center justify-center transition-colors hover:text-foreground"
+            >
+              Terms
+            </Link>
           </div>
         </footer>
       </div>
