@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 import type { Session } from "@supabase/supabase-js";
 
 import AuthModal from "../components/auth-modal";
+import { getTrialEligibility } from "../actions";
+import { getOrCreateDeviceId } from "@/lib/device-id";
 import { createClient } from "@/lib/supabase/client";
 import { PLANS, formatPrice, type Currency, type PlanId } from "@/lib/payments";
 import { SITE } from "@/lib/site";
@@ -18,38 +20,70 @@ export default function PricingPage() {
   const [pendingPlan, setPendingPlan] = useState<PlanId | null>(null);
   const [notice, setNotice] = useState("");
   const [busyPlan, setBusyPlan] = useState<PlanId | null>(null);
+  const [trialEligible, setTrialEligible] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
     let active = true;
+
+    const refreshEligibility = () => {
+      getTrialEligibility(getOrCreateDeviceId())
+        .then((result) => active && setTrialEligible(result.eligible))
+        .catch(() => {});
+    };
+
     supabase.auth
       .getSession()
-      .then(({ data }) => active && setSession(data.session))
+      .then(({ data }) => {
+        if (!active) return;
+        setSession(data.session);
+        refreshEligibility();
+      })
       .catch(() => {});
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((_event, next) => setSession(next));
+    } = supabase.auth.onAuthStateChange((event, next) => {
+      setSession(next);
+      if (event !== "INITIAL_SESSION") refreshEligibility();
+    });
     return () => {
       active = false;
       subscription.unsubscribe();
     };
   }, []);
 
-  const runCheckout = async (plan: PlanId) => {
+  const runCheckout = async (plan: PlanId, trial = false): Promise<void> => {
     setBusyPlan(plan);
     setNotice("");
     try {
+      const payload: Record<string, unknown> = { plan, currency };
+      if (trial) {
+        payload.trial = true;
+        payload.deviceId = getOrCreateDeviceId();
+      }
       const response = await fetch("/api/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ plan, currency }),
+        body: JSON.stringify(payload),
       });
-      const data = (await response.json()) as { url?: string };
+      const data = (await response.json()) as { url?: string; error?: string };
 
       if (response.ok && data.url) {
         window.location.assign(data.url);
         return;
       }
+
+      if (
+        trial &&
+        response.status === 403 &&
+        data.error === "trial_ineligible"
+      ) {
+        // Eligibility changed since the page rendered (e.g. signed into an
+        // account that already subscribed) — fall back to regular checkout.
+        await runCheckout(plan, false);
+        return;
+      }
+
       setNotice(
         "Payments are being finalised. Create your account now and we'll email you the moment Pro is live.",
       );
@@ -77,7 +111,7 @@ export default function PricingPage() {
       setShowAuth(true);
       return;
     }
-    void runCheckout(plan);
+    void runCheckout(plan, plan === "pro" && trialEligible);
   };
 
   return (
@@ -211,8 +245,17 @@ export default function PricingPage() {
                         : "border border-border text-foreground hover:bg-surface-muted"
                     }`}
                   >
-                    {busyPlan === plan.id ? "Starting…" : plan.cta}
+                    {busyPlan === plan.id
+                      ? "Starting…"
+                      : plan.id === "pro" && trialEligible
+                        ? "Start 7-day free trial"
+                        : plan.cta}
                   </button>
+                  {plan.id === "pro" && trialEligible && (
+                    <p className="mt-2 text-center text-xs text-tertiary">
+                      7 days free, then {price}/month. Cancel anytime.
+                    </p>
+                  )}
                 </div>
               );
             })}
@@ -221,6 +264,7 @@ export default function PricingPage() {
           <p className="mt-8 max-w-xl text-center text-xs leading-relaxed text-tertiary">
             Prices in USD and Nigerian Naira (NGN). Cancel anytime. Secure
             checkout handles cards and bank transfers.
+            {trialEligible && " New members get a 7-day free trial on Pro."}
           </p>
         </div>
 
@@ -263,7 +307,12 @@ export default function PricingPage() {
           onClose={() => setShowAuth(false)}
           onAuthed={() => {
             setShowAuth(false);
-            if (pendingPlan) void runCheckout(pendingPlan);
+            if (pendingPlan) {
+              void runCheckout(
+                pendingPlan,
+                pendingPlan === "pro" && trialEligible,
+              );
+            }
             setPendingPlan(null);
           }}
         />

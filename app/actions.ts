@@ -19,6 +19,7 @@ import {
 } from "@/lib/quota";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
+import { checkTrialEligibility, type TrialEligibility } from "@/lib/trials";
 
 const initialResult: AppState = {
   status: "idle",
@@ -76,6 +77,33 @@ export async function getCalendarStatus(): Promise<boolean> {
   return isCalendarConnected(user.id);
 }
 
+/**
+ * Free-trial eligibility for this browser device (+ the signed-in user,
+ * if any). Signed-out callers only get the device half of the check; the
+ * account half is re-validated when checkout starts.
+ */
+export async function getTrialEligibility(
+  deviceId: string,
+): Promise<TrialEligibility> {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return checkTrialEligibility(user?.id ?? null, deviceId);
+}
+
+/** When the current trial ends, or null when not trialing. */
+async function getTrialEnd(userId: string): Promise<string | null> {
+  const admin = createAdminClient();
+  if (!admin) return null;
+  const { data } = await admin
+    .from("subscriptions")
+    .select("trial_end")
+    .eq("user_id", userId)
+    .maybeSingle();
+  return typeof data?.trial_end === "string" ? data.trial_end : null;
+}
+
 export type AccountSummary = {
   email: string;
   plan: PlanId;
@@ -83,6 +111,8 @@ export type AccountSummary = {
   /** Monthly extraction limit, or null for unlimited (paid). */
   limit: number | null;
   calendarConnected: boolean;
+  /** When the current trial ends (ISO), null when not trialing. */
+  trialEnd: string | null;
 };
 
 /** Profile data for the signed-in user, or null when signed out. */
@@ -94,10 +124,11 @@ export async function getAccountSummary(): Promise<AccountSummary | null> {
 
   if (!user) return null;
 
-  const [plan, used, calendarConnected] = await Promise.all([
+  const [plan, used, calendarConnected, trialEnd] = await Promise.all([
     getUserPlan(user.id),
     getMonthlyUsage(user.id),
     isCalendarConnected(user.id),
+    getTrialEnd(user.id),
   ]);
 
   return {
@@ -106,6 +137,7 @@ export async function getAccountSummary(): Promise<AccountSummary | null> {
     used,
     limit: plan === "free" ? FREE_MONTHLY_EXTRACTION_LIMIT : null,
     calendarConnected,
+    trialEnd,
   };
 }
 

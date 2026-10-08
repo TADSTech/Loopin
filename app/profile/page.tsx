@@ -162,6 +162,19 @@ export default function ProfilePage() {
   const limit = summary?.limit ?? null;
   const pct = limit ? Math.min(100, Math.round((used / limit) * 100)) : 0;
 
+  // trial_end is cleared by the webhook when the trial concludes, so its
+  // presence (for a paid plan) means the trial is still running.
+  const trialEndsAt = summary?.trialEnd ? new Date(summary.trialEnd) : null;
+  const onTrial = isPro && trialEndsAt !== null;
+  const trialEndLabel =
+    trialEndsAt !== null
+      ? trialEndsAt.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        })
+      : "";
+
   return (
     <main
       id="main-content"
@@ -336,7 +349,7 @@ export default function ProfilePage() {
                 />
               ) : isPro ? (
                 <span className="rounded-full bg-primary-soft px-2.5 py-0.5 text-[11px] font-medium text-primary">
-                  {summary.plan}
+                  {onTrial ? `${summary.plan} · trial` : summary.plan}
                 </span>
               ) : (
                 <span className="rounded-full bg-surface-muted px-2.5 py-0.5 text-[11px] font-medium text-tertiary">
@@ -352,9 +365,17 @@ export default function ProfilePage() {
                 <div className="h-1.5 w-full animate-pulse rounded-full bg-surface-muted" />
               </div>
             ) : isPro ? (
-              <p className="mt-3 text-sm text-foreground">
-                Unlimited extractions. Nice.
-              </p>
+              <>
+                <p className="mt-3 text-sm text-foreground">
+                  Unlimited extractions. Nice.
+                </p>
+                {onTrial && (
+                  <p className="mt-1 text-xs text-tertiary">
+                    Free trial ends {trialEndLabel} — your saved card is charged
+                    then unless you cancel first.
+                  </p>
+                )}
+              </>
             ) : (
               <>
                 <p className="mt-3 text-sm text-foreground">

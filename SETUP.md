@@ -146,7 +146,8 @@ soft-launch state. Go through this ordered list **after** Steps 1–5:
    `https://loopin.tadstech.dev/api/webhooks/bachs` and subscribe to:
    `collection.succeeded`, `checkout.completed`,
    `customer.subscription.created`, `customer.subscription.updated`,
-   `customer.subscription.deleted`. Copy its signing secret →
+   `customer.subscription.deleted`, `invoice.paid`,
+   `invoice.payment_failed`. Copy its signing secret →
    `BACHS_WEBHOOK_SECRET` on Vercel.
    - **Single slash only** — a `//` in the URL gets a 308 from Vercel and the
      delivery dies at the edge (nothing in `vercel logs`).
@@ -163,22 +164,34 @@ soft-launch state. Go through this ordered list **after** Steps 1–5:
    `Delivery attempts: 0` → event_source/event subscriptions; `401` → secret
    mismatch; `308` → URL; `200 {"received":true}` without a row → event type
    or missing metadata (see `[bachs-webhook] no entitlement` warn).
-4. Recurring billing requires dashboard products (raw pricing = one-time
-   charge that **never expires**): create pro/team products with **monthly
-   recurring** pricing in **sandbox** → set `BACHS_PRODUCT_PRO_USD`,
+   **Trial path:** a **new account** (never subscribed) on a fresh browser
+   sees "Start 7-day free trial"; checkout saves the card **without
+   charging**; the webhook writes `plan='pro'` + `trial_end ≈ +7 days` and a
+   `trial_devices` row (`status='active'`). After that both checks fail —
+   same account → `already_subscribed`, any new account on the same browser
+   → `device_used` (both surface as a normal "Upgrade" button; a direct
+   trial request gets HTTP 403 `trial_ineligible` and the page falls back to
+   regular checkout).
+4. **Products: created in sandbox and wired.** `BACHS_PRODUCT_PRO_USD`,
    `BACHS_PRODUCT_PRO_NGN`, `BACHS_PRODUCT_TEAM_USD`,
-   `BACHS_PRODUCT_TEAM_NGN` on Vercel. With these set, checkout completes
-   with `"mode": "subscription"` and renewals ride the
-   `customer.subscription.*` events (already handled — no code changes).
+   `BACHS_PRODUCT_TEAM_NGN` (monthly recurring) plus
+   `BACHS_PRODUCT_PRO_USD_TRIAL` / `BACHS_PRODUCT_PRO_NGN_TRIAL` (same
+   prices, `trial_period: 7 days`) — all six set on Vercel and locally.
+   Raw pricing (no product) = one-time charge that **never expires**, so
+   keep these set. Trial eligibility is enforced server-side in
+   `/api/checkout`: never-subscribed account **and** unused device, and the
+   trial product must exist (missing env → 503 `trial_not_configured`,
+   never a silent charge).
 5. **Going live** (~15 min, nothing crosses over — sandbox and production
    data are isolated; code is unchanged, the base URL follows the key
    prefix):
    1. Live mode → create `sk_live_…` → set `BACHS_API_KEY` on Vercel only.
       **Never use live keys locally.**
-   2. Recreate the webhook endpoint (same URL, same events, **Account
-      events**) → new `whsec_…` → replace `BACHS_WEBHOOK_SECRET` on Vercel.
-   3. Recreate the 4 recurring products in live → replace
-      `BACHS_PRODUCT_*` on Vercel.
+   2. Recreate the webhook endpoint (same URL, all seven events above,
+      **Account events**) → new `whsec_…` → replace
+      `BACHS_WEBHOOK_SECRET` on Vercel.
+   3. Recreate all 6 products in live (4 recurring + 2 trial) → replace the
+      six `BACHS_PRODUCT_*` values on Vercel.
    4. Redeploy → one small real payment → payload must show
       `"mode": "subscription"` and the row must flip to
       `plan='pro', status='active'`.
@@ -386,20 +399,27 @@ https://<your-domain>/api/webhooks/bachs
 ```
 
 Subscribe to `collection.succeeded`, `checkout.completed`,
-`customer.subscription.created`, `customer.subscription.updated`, and
-`customer.subscription.deleted`. Deliveries are verified here against
+`customer.subscription.created`, `customer.subscription.updated`,
+`customer.subscription.deleted`, `invoice.paid`, and
+`invoice.payment_failed`. Deliveries are verified here against
 `X-Bachs-Signature-V2` (HMAC-SHA256 of `{timestamp}.{raw body}`, 5-minute
-replay window) using `BACHS_WEBHOOK_SECRET`.
+replay window) using `BACHS_WEBHOOK_SECRET`. The `invoice.*` events carry
+only a subscription id, so the handler fetches the subscription to recover
+the metadata; `invoice.paid` concludes a trial (device → `ended`) and
+re-grants, `invoice.payment_failed` only marks the device (access is kept
+while payment recovery retries).
 
-Optional — sell through catalog products instead of raw pricing (needed for
-**recurring subscriptions**; raw pricing charges one-time). Create the products
-in the Bachs dashboard or API, then:
+Sell through catalog products instead of raw pricing (required for
+**recurring subscriptions**; raw pricing charges one-time). Sandbox ids are
+already set; recreate the products in live when going live:
 
 ```env
 BACHS_PRODUCT_PRO_USD=""   # prod_... id; recurring (billing_cycle: month)
 BACHS_PRODUCT_PRO_NGN=""
 BACHS_PRODUCT_TEAM_USD=""
 BACHS_PRODUCT_TEAM_NGN=""
+BACHS_PRODUCT_PRO_USD_TRIAL=""   # same price + trial_period: 7 days
+BACHS_PRODUCT_PRO_NGN_TRIAL=""
 ```
 
 Still building? The Developer Portal's **Local Testing** tab forwards live

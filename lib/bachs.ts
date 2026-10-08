@@ -26,6 +26,21 @@ export function productIdForPlan(
   return process.env[key]?.trim() || null;
 }
 
+/**
+ * Product with a 7-day free trial window (trial_period set on the Bachs
+ * product). Falls back to null when no trial product is configured — the
+ * checkout route must then refuse a trial request rather than charge
+ * immediately.
+ */
+export function trialProductIdForPlan(
+  plan: PlanId,
+  currency: Currency,
+): string | null {
+  if (plan === "free") return null;
+  const key = `BACHS_PRODUCT_${plan.toUpperCase()}_${currency}_TRIAL`;
+  return process.env[key]?.trim() || null;
+}
+
 export type CheckoutSessionInput = {
   plan: Exclude<PlanId, "free">;
   currency: Currency;
@@ -34,6 +49,9 @@ export type CheckoutSessionInput = {
   successUrl: string;
   cancelUrl: string;
   productId?: string | null;
+  /** Browser device id — only sent for trial checkouts, copied onto the
+   * subscription metadata so the webhook can mark the device. */
+  deviceId?: string | null;
 };
 
 export function buildCheckoutSessionInput(
@@ -43,15 +61,20 @@ export function buildCheckoutSessionInput(
   if (!plan) throw new Error(`unknown plan: ${options.plan}`);
 
   const amount = minorToAmount(plan.price[options.currency]);
+  const metadata: Record<string, string> = {
+    user_id: options.userId,
+    plan: options.plan,
+    currency: options.currency,
+  };
+  if (options.deviceId) {
+    metadata.device_id = options.deviceId;
+    metadata.trial = "true";
+  }
   const base: Record<string, unknown> = {
     customer: { email: options.userEmail },
     success_url: options.successUrl,
     cancel_url: options.cancelUrl,
-    metadata: {
-      user_id: options.userId,
-      plan: options.plan,
-      currency: options.currency,
-    },
+    metadata,
   };
 
   if (options.productId) {
@@ -114,6 +137,39 @@ export async function getBachsCheckoutSession(
     const detail = await response.text().catch(() => "");
     throw new Error(
       `bachs checkout fetch failed: ${response.status} ${detail}`.slice(0, 500),
+    );
+  }
+
+  return (await response.json()) as Record<string, unknown>;
+}
+
+/**
+ * Fetch a subscription (used for invoice.* events, which carry only the
+ * subscription id — the checkout/sub metadata rides on this object).
+ * Throws on failure so the webhook retries.
+ */
+export async function getBachsSubscription(
+  subscriptionId: string,
+): Promise<Record<string, unknown> | null> {
+  const apiKey = process.env.BACHS_API_KEY?.trim();
+  if (!apiKey) return null;
+
+  const response = await fetch(
+    `${bachsBaseUrl(apiKey)}/v1/subscriptions/${encodeURIComponent(subscriptionId)}`,
+    {
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        Accept: "application/json",
+      },
+    },
+  );
+  if (!response.ok) {
+    const detail = await response.text().catch(() => "");
+    throw new Error(
+      `bachs subscription fetch failed: ${response.status} ${detail}`.slice(
+        0,
+        500,
+      ),
     );
   }
 
@@ -191,8 +247,28 @@ export function verifyBachsSignature(headers: SignatureHeaders): boolean {
 }
 
 export type WebhookGrant =
-  | { action: "grant"; userId: string; plan: "pro" | "team" }
-  | { action: "cancel"; userId: string }
+  | {
+      action: "grant";
+      userId: string;
+      plan: "pro" | "team";
+      /** Device id from checkout metadata — present only for trials. */
+      deviceId: string | null;
+      /** True once the trial has concluded (invoice billed/failed, or the
+       * subscription left trialing / was deleted). */
+      trialOver: boolean;
+      /** Only set when the event itself carried a period end, so retries
+       * never wipe a value a later event already wrote. */
+      periodEnd?: string | null;
+      /** Only set when the event carried a trial end (or cleared it). */
+      trialEnd?: string | null;
+    }
+  | {
+      action: "cancel";
+      userId: string;
+      deviceId: string | null;
+      trialOver: true;
+    }
+  | { action: "trial_over"; userId: string; deviceId: string | null }
   | { action: "ignore" };
 
 const asMetadata = (value: unknown): Record<string, string> | null => {
@@ -205,35 +281,88 @@ const asMetadata = (value: unknown): Record<string, string> | null => {
   );
 };
 
+// Key presence only — an explicit null (e.g. trial_end cleared) is meaningful.
+const hasField = (data: Record<string, unknown> | null, key: string): boolean =>
+  Boolean(data && Object.hasOwn(data, key));
+
+const asIsoOrNull = (value: unknown): string | null =>
+  typeof value === "string" && value.length > 0 ? value : null;
+
+const GRANT_EVENTS = new Set([
+  "collection.succeeded",
+  "checkout.completed",
+  "customer.subscription.created",
+  "customer.subscription.updated",
+  "invoice.paid",
+]);
+
 /**
- * Lenient event -> entitlement mapping. Reads user/plan from event or
- * checkout metadata (Bachs copies checkout metadata onto subscriptions) and
- * ignores anything it does not recognise, per the webhook guidance.
+ * Lenient event -> entitlement mapping. Reads user/plan/device from event
+ * or related-object metadata (Bachs copies checkout metadata onto
+ * subscriptions; invoice events carry only a subscription id, so the
+ * route fetches the subscription and passes it as `related`) and ignores
+ * anything it does not recognise, per the webhook guidance.
  */
 export function resolveWebhookGrant(
   type: string,
   data: Record<string, unknown> | null,
-  checkoutSession: Record<string, unknown> | null = null,
+  related: Record<string, unknown> | null = null,
 ): WebhookGrant {
   const metadata =
-    asMetadata(data?.metadata) ?? asMetadata(checkoutSession?.metadata) ?? null;
+    [asMetadata(data?.metadata), asMetadata(related?.metadata)].find(
+      (candidate) => candidate?.user_id,
+    ) ?? null;
   const userId = metadata?.user_id;
   if (!userId) return { action: "ignore" };
 
+  const deviceId =
+    typeof metadata?.device_id === "string" && metadata.device_id
+      ? metadata.device_id
+      : null;
+
   if (type === "customer.subscription.deleted") {
-    return { action: "cancel", userId };
+    return { action: "cancel", userId, deviceId, trialOver: true };
+  }
+
+  // A failed renewal changes no entitlement — it only concludes a trial
+  // (the saved card was charged and declined), so mark the device.
+  if (type === "invoice.payment_failed") {
+    return deviceId
+      ? { action: "trial_over", userId, deviceId }
+      : { action: "ignore" };
   }
 
   const plan = metadata?.plan;
   if (plan !== "pro" && plan !== "team") return { action: "ignore" };
 
-  if (
-    type === "collection.succeeded" ||
-    type === "checkout.completed" ||
-    type === "customer.subscription.created" ||
-    type === "customer.subscription.updated"
-  ) {
-    return { action: "grant", userId, plan };
+  if (GRANT_EVENTS.has(type)) {
+    const status = typeof data?.status === "string" ? data.status : null;
+    const trialOver =
+      type === "invoice.paid" ||
+      (type.startsWith("customer.subscription.") &&
+        status !== null &&
+        status !== "trialing");
+
+    const periodEnd = hasField(data, "current_period_end")
+      ? asIsoOrNull(data?.current_period_end)
+      : hasField(data, "period_end")
+        ? asIsoOrNull(data?.period_end)
+        : undefined;
+    const trialEnd = hasField(data, "trial_end")
+      ? asIsoOrNull(data?.trial_end)
+      : type === "invoice.paid"
+        ? null
+        : undefined;
+
+    return {
+      action: "grant",
+      userId,
+      plan,
+      deviceId,
+      trialOver,
+      ...(periodEnd !== undefined ? { periodEnd } : {}),
+      ...(trialEnd !== undefined ? { trialEnd } : {}),
+    };
   }
 
   return { action: "ignore" };

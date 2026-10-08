@@ -7,6 +7,7 @@ import {
   minorToAmount,
   productIdForPlan,
   resolveWebhookGrant,
+  trialProductIdForPlan,
   verifyBachsSignature,
 } from "@/lib/bachs";
 
@@ -36,11 +37,42 @@ describe("bachs money helpers", () => {
   });
 
   test("productIdForPlan reads plan/currency product env vars", () => {
-    expect(productIdForPlan("free", "USD")).toBeNull();
-    process.env.BACHS_PRODUCT_PRO_USD = "prod_test123";
-    expect(productIdForPlan("pro", "USD")).toBe("prod_test123");
-    expect(productIdForPlan("pro", "NGN")).toBeNull();
-    delete process.env.BACHS_PRODUCT_PRO_USD;
+    const savedUsd = process.env.BACHS_PRODUCT_PRO_USD;
+    const savedNgn = process.env.BACHS_PRODUCT_PRO_NGN;
+    try {
+      delete process.env.BACHS_PRODUCT_PRO_USD;
+      delete process.env.BACHS_PRODUCT_PRO_NGN;
+      expect(productIdForPlan("free", "USD")).toBeNull();
+      process.env.BACHS_PRODUCT_PRO_USD = "prod_test123";
+      expect(productIdForPlan("pro", "USD")).toBe("prod_test123");
+      expect(productIdForPlan("pro", "NGN")).toBeNull();
+    } finally {
+      if (savedUsd === undefined) delete process.env.BACHS_PRODUCT_PRO_USD;
+      else process.env.BACHS_PRODUCT_PRO_USD = savedUsd;
+      if (savedNgn === undefined) delete process.env.BACHS_PRODUCT_PRO_NGN;
+      else process.env.BACHS_PRODUCT_PRO_NGN = savedNgn;
+    }
+  });
+
+  test("trialProductIdForPlan reads the _TRIAL product env vars", () => {
+    const savedUsd = process.env.BACHS_PRODUCT_PRO_USD_TRIAL;
+    const savedNgn = process.env.BACHS_PRODUCT_PRO_NGN_TRIAL;
+    try {
+      delete process.env.BACHS_PRODUCT_PRO_USD_TRIAL;
+      delete process.env.BACHS_PRODUCT_PRO_NGN_TRIAL;
+      expect(trialProductIdForPlan("free", "USD")).toBeNull();
+      expect(trialProductIdForPlan("pro", "USD")).toBeNull();
+      process.env.BACHS_PRODUCT_PRO_USD_TRIAL = "prod_trial123";
+      expect(trialProductIdForPlan("pro", "USD")).toBe("prod_trial123");
+      expect(trialProductIdForPlan("pro", "NGN")).toBeNull();
+    } finally {
+      if (savedUsd === undefined)
+        delete process.env.BACHS_PRODUCT_PRO_USD_TRIAL;
+      else process.env.BACHS_PRODUCT_PRO_USD_TRIAL = savedUsd;
+      if (savedNgn === undefined)
+        delete process.env.BACHS_PRODUCT_PRO_NGN_TRIAL;
+      else process.env.BACHS_PRODUCT_PRO_NGN_TRIAL = savedNgn;
+    }
   });
 });
 
@@ -71,6 +103,26 @@ describe("buildCheckoutSessionInput", () => {
     ]);
     expect(input.pricing).toBeUndefined();
     expect(input.metadata).toMatchObject({ plan: "pro", currency: "NGN" });
+  });
+
+  test("adds device metadata for trial checkouts", () => {
+    const deviceId = "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee";
+    const input = buildCheckoutSessionInput({
+      ...baseOptions,
+      productId: "prod_trial",
+      deviceId,
+    });
+
+    expect(input.metadata).toEqual({
+      user_id: baseOptions.userId,
+      plan: "pro",
+      currency: "USD",
+      device_id: deviceId,
+      trial: "true",
+    });
+    expect(input.product_cart).toEqual([
+      { product_id: "prod_trial", quantity: 1 },
+    ]);
   });
 });
 
@@ -185,13 +237,20 @@ describe("verifyBachsSignature", () => {
 
 describe("resolveWebhookGrant", () => {
   const userId = "11111111-2222-3333-4444-555555555555";
+  const deviceId = "aaaaaaaa-bbbb-4ccc-8ddd-eeeeeeeeeeee";
 
   test("grants the plan from subscription event metadata", () => {
     expect(
       resolveWebhookGrant("customer.subscription.created", {
         metadata: { user_id: userId, plan: "pro" },
       }),
-    ).toEqual({ action: "grant", userId, plan: "pro" });
+    ).toEqual({
+      action: "grant",
+      userId,
+      plan: "pro",
+      deviceId: null,
+      trialOver: false,
+    });
   });
 
   test("grants the plan from checkout session metadata", () => {
@@ -201,21 +260,129 @@ describe("resolveWebhookGrant", () => {
         { checkout_id: "chk_1" },
         { metadata: { user_id: userId, plan: "team" } },
       ),
-    ).toEqual({ action: "grant", userId, plan: "team" });
+    ).toEqual({
+      action: "grant",
+      userId,
+      plan: "team",
+      deviceId: null,
+      trialOver: false,
+    });
+  });
+
+  test("keeps a trialing subscription open and stores its dates", () => {
+    const result = resolveWebhookGrant("customer.subscription.created", {
+      metadata: { user_id: userId, plan: "pro", device_id: deviceId },
+      status: "trialing",
+      current_period_end: "2026-10-15T00:00:00Z",
+      trial_end: "2026-10-15T00:00:00Z",
+    });
+    expect(result).toEqual({
+      action: "grant",
+      userId,
+      plan: "pro",
+      deviceId,
+      trialOver: false,
+      periodEnd: "2026-10-15T00:00:00Z",
+      trialEnd: "2026-10-15T00:00:00Z",
+    });
+  });
+
+  test("marks the trial over when the subscription leaves trialing", () => {
+    const result = resolveWebhookGrant("customer.subscription.updated", {
+      metadata: { user_id: userId, plan: "pro", device_id: deviceId },
+      status: "active",
+      current_period_end: "2026-11-15T00:00:00Z",
+      trial_end: null,
+    });
+    expect(result).toEqual({
+      action: "grant",
+      userId,
+      plan: "pro",
+      deviceId,
+      trialOver: true,
+      periodEnd: "2026-11-15T00:00:00Z",
+      trialEnd: null,
+    });
+  });
+
+  test("only sets period/trial dates the event actually carries", () => {
+    const result = resolveWebhookGrant("checkout.completed", {
+      checkout_id: "chk_1",
+      metadata: { user_id: userId, plan: "pro" },
+    });
+    expect(result).toEqual({
+      action: "grant",
+      userId,
+      plan: "pro",
+      deviceId: null,
+      trialOver: false,
+    });
+    expect(Object.hasOwn(result as object, "periodEnd")).toBe(false);
+    expect(Object.hasOwn(result as object, "trialEnd")).toBe(false);
+  });
+
+  test("reads metadata from the fetched subscription for invoice.paid", () => {
+    const result = resolveWebhookGrant(
+      "invoice.paid",
+      {
+        subscription: { subscription_id: "sub_1" },
+        metadata: {},
+        period_end: "2026-11-15T00:00:00Z",
+      },
+      { metadata: { user_id: userId, plan: "pro", device_id: deviceId } },
+    );
+    expect(result).toEqual({
+      action: "grant",
+      userId,
+      plan: "pro",
+      deviceId,
+      trialOver: true,
+      periodEnd: "2026-11-15T00:00:00Z",
+      trialEnd: null,
+    });
+  });
+
+  test("marks the device only on a failed trial-end charge", () => {
+    expect(
+      resolveWebhookGrant(
+        "invoice.payment_failed",
+        {
+          subscription: { subscription_id: "sub_1" },
+          metadata: {},
+        },
+        {
+          metadata: { user_id: userId, plan: "pro", device_id: deviceId },
+        },
+      ),
+    ).toEqual({ action: "trial_over", userId, deviceId });
+
+    expect(
+      resolveWebhookGrant(
+        "invoice.payment_failed",
+        {
+          subscription: { subscription_id: "sub_1" },
+          metadata: {},
+        },
+        { metadata: { user_id: userId, plan: "pro" } },
+      ),
+    ).toEqual({ action: "ignore" });
   });
 
   test("cancels on subscription deletion", () => {
     expect(
       resolveWebhookGrant("customer.subscription.deleted", {
-        metadata: { user_id: userId, plan: "pro" },
+        metadata: { user_id: userId, plan: "pro", device_id: deviceId },
       }),
-    ).toEqual({ action: "cancel", userId });
+    ).toEqual({ action: "cancel", userId, deviceId, trialOver: true });
   });
 
   test("ignores events without user metadata", () => {
     expect(resolveWebhookGrant("collection.succeeded", {})).toEqual({
       action: "ignore",
     });
+    expect(
+      resolveWebhookGrant("collection.succeeded", { metadata: {} }, null),
+    ).toEqual({ action: "ignore" });
   });
 
   test("ignores unknown plans and unknown event types", () => {
