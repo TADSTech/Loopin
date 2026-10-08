@@ -148,16 +148,40 @@ soft-launch state. Go through this ordered list **after** Steps 1–5:
    `customer.subscription.created`, `customer.subscription.updated`,
    `customer.subscription.deleted`. Copy its signing secret →
    `BACHS_WEBHOOK_SECRET` on Vercel.
+   - **Single slash only** — a `//` in the URL gets a 308 from Vercel and the
+     delivery dies at the edge (nothing in `vercel logs`).
+   - **Event source → Account events.** "Connected account events" makes
+     auto-delivery route _nothing_ (`Delivery attempts: 0`) while manual
+     Retry still works — a genuinely confusing failure mode.
+   - The Vercel value must be **byte-identical** to the endpoint's signing
+     secret — an empty/stale `BACHS_WEBHOOK_SECRET` = every delivery 401s.
 3. **Sandbox E2E:** sign in → `/pricing` → Pro → pay with the Bachs test
    card. The **webhook** (not the redirect) must flip
    `public.subscriptions` to `plan='pro', status='active'` — check the row in
    Supabase and the server logs for `[bachs-webhook]` errors.
+   If the row stays empty, read Bachs Delivery History + `vercel logs`:
+   `Delivery attempts: 0` → event_source/event subscriptions; `401` → secret
+   mismatch; `308` → URL; `200 {"received":true}` without a row → event type
+   or missing metadata (see `[bachs-webhook] no entitlement` warn).
 4. Recurring billing requires dashboard products (raw pricing = one-time
-   charge): create pro/team products → set
-   `BACHS_PRODUCT_PRO_USD`, `BACHS_PRODUCT_PRO_NGN`,
-   `BACHS_PRODUCT_TEAM_USD`, `BACHS_PRODUCT_TEAM_NGN` on Vercel.
-5. Going live = swap to `sk_live_…` — the base URL is inferred from the key
-   prefix. **Never use live keys locally.**
+   charge that **never expires**): create pro/team products with **monthly
+   recurring** pricing in **sandbox** → set `BACHS_PRODUCT_PRO_USD`,
+   `BACHS_PRODUCT_PRO_NGN`, `BACHS_PRODUCT_TEAM_USD`,
+   `BACHS_PRODUCT_TEAM_NGN` on Vercel. With these set, checkout completes
+   with `"mode": "subscription"` and renewals ride the
+   `customer.subscription.*` events (already handled — no code changes).
+5. **Going live** (~15 min, nothing crosses over — sandbox and production
+   data are isolated; code is unchanged, the base URL follows the key
+   prefix):
+   1. Live mode → create `sk_live_…` → set `BACHS_API_KEY` on Vercel only.
+      **Never use live keys locally.**
+   2. Recreate the webhook endpoint (same URL, same events, **Account
+      events**) → new `whsec_…` → replace `BACHS_WEBHOOK_SECRET` on Vercel.
+   3. Recreate the 4 recurring products in live → replace
+      `BACHS_PRODUCT_*` on Vercel.
+   4. Redeploy → one small real payment → payload must show
+      `"mode": "subscription"` and the row must flip to
+      `plan='pro', status='active'`.
 
 Full detail lives in `AGENTS.md`. Coverage for the webhook logic:
 `tests/bachs.test.ts`.
