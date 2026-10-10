@@ -314,7 +314,9 @@ flow, so syncing needs no manual tokens.
      `https://your-domain.com/auth/callback`
 
 > The scopes we request at sign-in aren't configured here — they're sent by the
-> app (`https://www.googleapis.com/auth/calendar`).
+> app (`https://www.googleapis.com/auth/calendar.events`, plus Supabase's
+> default `email`/`profile`). Declare the same scopes on the Google Cloud
+> OAuth consent screen → **Data access** page (see `verification.md`).
 
 ---
 

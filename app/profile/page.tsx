@@ -114,7 +114,7 @@ export default function ProfilePage() {
       provider: "google",
       options: {
         redirectTo: `${window.location.origin}/auth/callback?next=/profile`,
-        scopes: "https://www.googleapis.com/auth/calendar",
+        scopes: "https://www.googleapis.com/auth/calendar.events",
         queryParams: { access_type: "offline", prompt: "consent" },
       },
     });

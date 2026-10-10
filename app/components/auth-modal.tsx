@@ -56,8 +56,9 @@ export default function AuthModal({
       provider: "google",
       options: {
         redirectTo: `${window.location.origin}/auth/callback?next=/`,
-        // One-click setup: request Calendar access during Google sign-in.
-        scopes: "https://www.googleapis.com/auth/calendar",
+        // One-click setup: request Calendar event write access during sign-in.
+        // Narrowest scope that covers events.insert — keeps Google verification light.
+        scopes: "https://www.googleapis.com/auth/calendar.events",
         queryParams: { access_type: "offline", prompt: "consent" },
       },
     });
