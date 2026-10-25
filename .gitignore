@@ -45,3 +45,11 @@ next-env.d.ts
 # agents metadata
 .agents/
 
+# internal tooling and hooks
+.internal-sisyphus
+.internal-workbuddy-ai
+.husky
+
+# deck shots and assets
+.deck-shots
+
