@@ -30,11 +30,12 @@ const CookieButton = ({
   isSelected: boolean;
   onToggle: (selected: boolean) => void;
 }) => {
+  const buttonClass = isSelected
+    ? "flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-primary-soft text-primary"
+    : "flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:bg-surface-muted transition-colors cursor-pointer";
   return (
     <div
-      className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border hover:bg-surface-muted transition-colors cursor-pointer ${
-        isSelected ? "bg-primary-soft text-primary" : ""
-      }"
+      className={buttonClass}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -134,9 +135,6 @@ export default function CookieConsent() {
         ? "Do you consent to analytics, advertising, and functional cookies?"
         : "No non-essential cookies will be stored.")
     ));
-    if (setConsented) {
-      // Force re-run the effect to store
-    }
   };
 
   return (
