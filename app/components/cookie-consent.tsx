@@ -139,18 +139,33 @@ export default function CookieConsent() {
 
   return (
     <div
-      className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border px-4 py-3 text-sm text-tertiary animate-fade-in"
+      role="region"
+      aria-label="Cookie consent"
+      className="fixed bottom-0 left-0 right-0 z-50 bg-background border-t border-border px-4 py-3 sm:py-3.5 text-sm text-tertiary animate-fade-in backdrop-blur-md"
       suppressHydrationWarning
     >
-      <div className="max-w-7xl mx-auto">
-        <p className="flex items-center gap-2">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+        <p className="flex flex-wrap items-center justify-center sm:justify-start gap-x-1.5 gap-y-1 text-xs sm:text-sm leading-relaxed">
           <span>
             To make Loopin work best, we and our third-party providers use cookies
           </span>
-          <span className="font-medium text-primary hover:underline" onClick={() => setSelectedCategories(["essential", "analytics", "functional"])}>
+          <button
+            type="button"
+            className="font-medium text-primary hover:underline cursor-pointer"
+            onClick={() => {
+              setSelectedCategories(["essential", "analytics", "functional"]);
+              setConsented(true);
+            }}
+          >
             I agree
+          </button>
+          <span>
+            to the use of cookies as described in our{" "}
+            <a href="/privacy" className="font-medium text-primary hover:underline">
+              Privacy Policy
+            </a>
+            .
           </span>
-          <span className="ml-2">to the use of cookies as described in our <a href="/privacy" className="font-medium text-primary hover:underline">Privacy Policy</a>.</span>
         </p>
       </div>
     </div>
