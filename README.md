@@ -87,6 +87,9 @@
 - **Bun Runtime**: Make sure you have [Bun](https://bun.sh) installed.
 - **Supabase Project**: Create one at [supabase.com](https://supabase.com), run `supabase/schema.sql` in the SQL editor, and enable the Google provider (with the Calendar scope) under Authentication → Providers.
 - **Groq API Key** (optional): Get a key from the [Groq Console](https://console.groq.com). Users can also supply their own key in Settings.
+- **Rumpty Cloud** (optional): For fastest hackathon deployment, you can use [Rumpty Cloud](https://rumptycloud.com) which provides managed PostgreSQL, one-click deployment, and a free tier of 5 full-stack apps. All environment variables documented below can be adapted from Rumpty Cloud's dashboard.
+
+> **Note for self-hosters**: You can use any infrastructure you prefer (Vercel, Netlify, traditional VPS, etc.). All environment variables documented below can be migrated from Rumpty Cloud's settings if you start there.
 
 ### Installation
 

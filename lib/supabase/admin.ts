@@ -21,3 +21,28 @@ export function createAdminClient() {
     auth: { persistSession: false, autoRefreshToken: false },
   });
 }
+
+/**
+ * ⚠️ Rumpty Cloud PostgreSQL (commented out — use Supabase Admin client instead)
+ * Connect to Rumpty Cloud's managed PostgreSQL from a server with service-role
+ * privileges. Uses the connection string from the Rumpty Cloud console.
+ *
+ * Requires the `pg` package: `bun add pg`
+ *
+ * // import { Pool } from "pg"
+ * // const pool = new Pool({
+ * //   connectionString: process.env.RUMPTY_DB_URL,
+ * //   ssl: { rejectUnauthorized: false },
+ * // })
+ *
+ * // // Example usage (commented out — use Supabase Admin client instead)
+ * // const { data, error } = await pool.query(
+ * //   "UPDATE calendar_tokens SET status = 'active' WHERE user_id = $1", [userId]
+ * // )
+ *
+ * // ⚠️ Security: Rumpty Cloud PostgreSQL does NOT have RLS for server-side
+ * // direct connections. Only use this if you understand the security
+ * // implications and are using it for internal/controlled operations.
+ * // Prefer the Supabase Admin client (createAdminClient()) which applies
+ * // service-role protections and token management.
+ */

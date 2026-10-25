@@ -1,0 +1,41 @@
+# Rumpty Cloud Hackathon Survey
+
+**1. Best part about using Rumpty Cloud this sprint?**
+Getting a free PostgreSQL database running in minutes without any provisioning hassle. The one-click Git deployment was also smooth, and the Africa-based, solar-powered infrastructure was a nice bonus. Being able to focus on building instead of managing infrastructure made the whole sprint easier.
+
+**2. Any bugs, downtime, or confusing docs?**
+No bugs or downtime. The docs were mostly clear. I did need to double-check the currency settings (naira vs dollars) early on, and the CLI (v0.3.1) worked well once I got past initial setup.
+
+**3. How does Rumpty Cloud compare to other platforms you've used?**
+It's easier than AWS for a solo project—much lower barrier to entry. Similar to Vercel in deployment ease, but it includes a free database tier, which Vercel doesn't. Heroku's free tier is too limited (512MB dyno, 18h/day), so Rumpty Cloud's free 5-app tier with full databases is much more generous. The Lagos location gives lower latency for African users, and the eco-friendly claim looks genuine (solar-powered). The only downside: it's newer, so some integrations required more searching than on mature platforms.
+
+**4. Deploy ease rating (1-10)?**
+8
+
+It was straightforward: connect Git, set environment variables, and the platform built and deployed automatically. Next.js was auto-detected. Minor deducts: configuring Supabase URLs separately, the Bachs payment setup having specific requirements (single-slash webhook URL, account events source), and initial confusion about which env vars were needed. Overall smoother than Vercel, where you also need to configure Supabase, because Rumpty Cloud includes the database natively.
+
+**5. Would you use Rumpty Cloud for a production project?**
+Maybe.
+
+For a side project or startup targeting African users, the free tier, local infrastructure, and cost structure (pay in naira or dollars) are compelling. For global production targeting North America/Europe, I'd probably stick with Vercel or Cloudflare Pages for their broader ecosystem. But for a Nigeria/Africa-focused app, Rumpty Cloud would be my top choice. The managed databases and S3 buckets cover most backend needs without extra costs.
+
+**6. Features you'd like to see integrated?**
+- Built-in CI/CD pipelines (already works via git connect, would like more customization)
+- Support for serverless functions (Next.js edge functions would be great)
+- Enhanced monitoring and logging (currently using basic logs, would love better error tracking)
+- Database management UI (Rumpty Cloud has this, would like Tableau/Metabase integration)
+- One-click domain configuration (currently manual DNS setup)
+
+**7. Likelihood to recommend (1-5)?**
+4
+
+I'd recommend it, especially for developers building for African users or looking for cost-effective hosting. The free tier is generous, the eco-friendly angle is genuine, and the platform is improving rapidly. It's still growing (some features are newer than established platforms), but for a hackathon or side project, it's an excellent choice. Would particularly recommend to friends in Africa for the lower latency and local infrastructure.
+
+**8. What problem does your project solve (2-3 sentences)?**
+Loopin turns screenshots, event flyers, and notes into synced Google Calendar events using AI. It's designed for busy professionals, students, and teams who attend conferences or receive event info via images and need to add those events to their calendars quickly without manual data entry. The free plan includes 3 extractions per month with no card required, making it accessible for casual users, while Pro plans unlock unlimited extractions for power users.
+
+**9. Technical documentation link:**
+https://github.com/tadstech/loopin/blob/main/RUMPTY.md
+
+**10. Technical architecture brief:**
+Next.js 16 app with the App Router and Server Components. Backend uses Supabase for PostgreSQL, authentication (Google OAuth), and storage. AI event extraction via Groq (default) or OpenRouter (fallback). Google Calendar enables one-click sync. Payments through Bachs (USD/NGN checkout). Code structured into app/routes for API endpoints, app/components for UI, and lib/ for utilities. Supabase Row Level Security restricts data access to authenticated users. Feature flags manage free vs. Pro tier quotas server-side. State combines Supabase session with browser localStorage for preferences. API routes protected with Bearer token auth via CRON_SECRET environment variable.

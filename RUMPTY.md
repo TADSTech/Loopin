@@ -1,188 +1,248 @@
 # Rumpty Cloud Deployment Guide for Loopin
 
-## Overview
+**v3.0** — Hackathon Deployment Checklist
 
-This guide explains how to deploy the **Loopin** project to **Rumpty Cloud** for your hackathon. Rumpty Cloud is an Africa-based cloud platform (built in Lagos, Nigeria) offering free tier services including PostgreSQL databases, S3-compatible storage, Linux VMs, and one-click deployments.
+*Loopin v3 — AI calendar event extraction & Google Calendar sync*
 
-## Prerequisites
+***
 
-- A **Rumpty Cloud account** (sign up at [rumptycloud.com](https://rumptycloud.com))
-- The Loopin project code (this repository)
-- Supabase project with schema already set up (refer to `SETUP.md`)
-- Google OAuth credentials (Client ID/Secret)
-- Bachs API keys for payments (sandbox key for hackathon)
+## 📋 Table of Contents
 
-## Step 1: Create Your Rumpty Cloud Project
+1. [Overview](#overview)
+2. [Get Started](#get-started)
+3. [Platform Configuration](#platform-configuration)
+4. [Deployment](#deployment)
+5. [Self-Hosting Note](#self-hosting-note)
+6. [RAM Recommendations](#ram-recommendations)
+7. [Hackathon Tips](#hackathon-specific-tips)
+8. [Commands](#commands-to-know)
+9. [Need Help?](#need-help)
 
-1. Log in to [rumptycloud.com/console](https://rumptycloud.com/console)
-2. Click **"Create New Project"** or **"Deployments"**
-3. Choose **"Connect GitHub Repository"** and select this repo
-4. Select **Next.js** as the framework
-5. The platform will auto-detect:
+---
+
+## 1. Overview
+
+This guide explains how to deploy the **Loopin** project to **Rumpty Cloud** for your hackathon.
+
+**Rumpty Cloud** is a cloud platform built in Lagos, Nigeria offering:
+
+- Free tier: 5 full-stack apps
+- Eco-friendly infrastructure: ~90% solar-powered (Lagos-based)
+- Managed hosting with predictable pricing
+- One-click deployment from Git
+- Pay in naira or dollars
+- Designed for African developers and global builders alike
+
+**Loopin** is a Next.js 16 app that:
+
+- Extracts calendar events from images and text using AI
+- Syncs events to Google Calendar in one click
+- Enforces a free-tier quota of 3 extractions per month
+- Processes payments through [Bachs.io](https://bachs.io)
+- Supports Google Sign-in and Calendar OAuth
+
+> **Rumpty Cloud** is the recommended platform for rapid deployment. You can self-host Loopin using any infrastructure (Vercel, Netlify, traditional VPS, etc.), but this guide focuses on getting you on Rumpty Cloud fastest.
+
+---
+
+## 2. Get Started
+
+### 2.1 Create Your Rumpty Cloud Account
+
+1. Visit [rumptycloud.com](https://rumptycloud.com) and sign up for an account
+2. Verify your email and log in to the [Rumpty Cloud console](https://rumptycloud.com/console)
+3. Note your dashboard URL — you'll use this to manage your app
+
+### 2.2 Quick Prerequisites
+
+| Item | Needed For |
+|------|------------|
+| **Rumpty Cloud account** | All deployment steps |
+| **Loopin codebase** | This repository |
+| **Google OAuth** | Client ID and Secret from Google Cloud Console |
+| **Bachs payments** | Sandbox API key for hackathon (never use live keys locally) |
+
+> **Already completed** (verified 7 Oct 2026):
+> - ✅ Google sign-in works
+> - ✅ Google Calendar connected
+> - ✅ Extraction works locally (`bun dev`)
+> - ✅ Vercel CLI signed in (`vercel whoami` → `tadstech`)
+
+> **Still missing**: production deploy, production URL, Bachs payment keys.
+
+> **~15 minutes** to complete remaining steps.
+
+---
+
+## 3. Platform Configuration
+
+### 3.1 Connect Your Repository
+
+1. In the Rumpty Cloud dashboard, click **"Create New Project"** or **"Deployments"**
+2. Choose **"Connect GitHub Repository"** and select this repo
+3. Select **Next.js** as the framework
+4. The platform auto-detects:
    - Build command: `next build`
    - Start command: `next start`
    - Output directory: `.next`
 
-## Step 2: Set Up PostgreSQL Database
+### 3.2 Environment Variables
 
-1. In the Rumpty Cloud console, go to **"Managed Databases"**
-2. Click **"Create PostgreSQL Database"**
-3. Choose the **Playground** (free tier) plan
-4. Note the connection string - you'll need this for environment variables
-5. The database hostname will look like: `db.<project>.rumptycloud.ng`
-
-## Step 3: Configure Environment Variables
-
-In the Rumpty Cloud dashboard, go to **Project Settings → Environment Variables** and add:
+In the Rumpty Cloud dashboard → **Project Settings → Environment Variables**, add all required vars:
 
 ```env
-# Supabase (required - use your existing Supabase project)
+# ===== SUPABASE (required) =====
 NEXT_PUBLIC_SUPABASE_URL="https://<your-ref>.supabase.co"
 NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="sb_publishable_..."
-SUPABASE_SECRET_KEY="sb_secret_..."
+SUPABASE_SECRET_KEY="sb_secret_..."  # server-only — never expose in client code
 
-# Google OAuth (for sign-in + Calendar integration)
+# ===== GOOGLE OAUTH =====
 GOOGLE_CLIENT_ID="your-google-client-id"
 GOOGLE_CLIENT_SECRET="your-google-client-secret"
 
-# Managed AI (Groq or OpenRouter)
-GROQ_API_KEY="your-groq-key"  # optional - opens free models fallback
-OPENROUTER_API_KEY="your-openrouter-key"  # optional
+# ===== MANAGED AI =====
+# Groq cheap Llama — ~$0.05 / 1M input tokens
+# OpenRouter free-models router — falls back automatically
+GROQ_API_KEY="your-groq-key"       # optional — use only if you supplied your own key
+OPENROUTER_API_KEY="your-openrouter-key"  # optional — free models fallback
 
-# Cron job secret (protects /api/cron/reminders)
+# ===== CRON SECRET =====
+# Generate a random string >= 32 characters
 CRON_SECRET="random-string-at-least-32-chars"
 
-# Bachs Payments (sandbox for hackathon)
-BACHS_API_KEY="sk_sandbox_..."  # from Bachs Developer Portal
+# ===== BACHS PAYMENTS (sandbox) =====
+BACHS_API_KEY="sk_sandbox_..."
 BACHS_WEBHOOK_SECRET="whsec_..."  # from Bachs webhook endpoint
 
-# Bachs Product IDs (required for pricing page)
-BACHS_PRODUCT_PRO_USD="prod_..."      # recurring monthly
-BACHS_PRODUCT_PRO_NGN="prod_..."
-BACHS_PRODUCT_TEAM_USD="prod_..."
-BACHS_PRODUCT_TEAM_NGN="prod_..."
-BACHS_PRODUCT_PRO_USD_TRIAL="prod_..._TRIAL"  # 7-day trial
-BACHS_PRODUCT_PRO_NGN_TRIAL="prod_..._TRIAL"
+# ===== BACHS PRODUCT IDs =====
+BACHS_PRODUCT_PRO_USD="prod_..."          # recurring monthly, USD
+BACHS_PRODUCT_PRO_NGN="prod_..."          # recurring monthly, NGN
+BACHS_PRODUCT_TEAM_USD="prod_..."         # recurring monthly, USD (team)
+BACHS_PRODUCT_TEAM_NGN="prod_..."         # recurring monthly, NGN (team)
+BACHS_PRODUCT_PRO_USD_TRIAL="prod_..._TRIAL"  # 7-day trial, USD
+BACHS_PRODUCT_PRO_NGN_TRIAL="prod_..._TRIAL"  # 7-day trial, NGN
 
-# Rumpty Cloud specific
-RUMPTY_DB_URL="postgresql://postgres.<ref>@aws-0-<region>.pooler.supabase.com:5432/postgres"
+# ===== RUMMPTY CLOUD =====
+# The platform selects the base URL automatically from the key prefix.
+# No additional config needed — code detects sandbox vs live mode.
 ```
 
-**Important notes:**
-- `SUPABASE_SECRET_KEY` is server-only - never expose in client code
-- Bachs keys are required for the pricing page to work properly
-- The `CRON_SECRET` must match what you use in `app/api/cron/reminders/route.ts`
-- Google Client ID/Secret must match your Supabase OAuth configuration
+> **Critical notes:**
+> - `SUPABASE_SECRET_KEY` is **server-only** — never expose in client code or commit to git
+> - Bachs keys are **required** for the pricing page to function
+> - The `CRON_SECRET` **must match** what you use in `app/api/cron/reminders/route.ts`
+> - Google Client ID/Secret **must match** your Supabase OAuth configuration
+> - **Single slash only** in webhook URL — a `//` gets a 308 from Vercel and delivery dies at the edge
+> - **Event source → Account events** — "Connected account events" makes auto-delivery route nothing; manual Retry still works
+> - The Vercel secret must be **byte-identical** to the endpoint's signing secret
 
-## Step 4: Database Migration
+> **Platform note**: Rumpty Cloud automatically selects the correct base URL (sandbox vs production) from your Bachs key prefix. No manual URL configuration needed.
 
-Rumpty Cloud uses managed PostgreSQL, so you have two options:
+---
 
-### Option A: Use Supabase Schema (recommended - keeps existing setup)
-1. Get your Rumpty Cloud PostgreSQL connection string
-2. Run migrations using Supabase CLI or SQL Editor:
-   ```bash
-   # Using Supabase CLI (if linked)
-   bunx supabase db push
-   
-   # Or using connection string directly
-   bunx supabase db push --db-url "postgresql://postgres.<ref>:<password>@..."
-   ```
-3. Alternatively, run the SQL files from `supabase/` directory against your Rumpty Cloud DB
+## 4. Deployment
 
-### Option B: Use Rumpty Cloud's Built-in SQL Editor
-1. Go to **"SQL Editor"** in the Rumpty Cloud console
-2. Paste and run `supabase/schema.sql`
-3. Run `supabase/migrations/20260702000000_platform.sql`
+### 4.1 Automatic Build & Deploy
 
-## Step 5: Set Up Supabase Auth URLs
+1. Rumpty Cloud starts building automatically on Git push
+2. Monitor deployment logs in the console
+3. Once deployed, you'll get a URL like: `https://loopin-<hash>.rumptycloud.ng`
+
+### 4.2 Configure Supabase Auth
 
 1. In Supabase Dashboard → **Authentication → URL Configuration**
 2. Set **Site URL** to your Rumpty Cloud app URL (e.g., `https://loopin.rumptycloud.ng`)
 3. Add **Redirect URLs**: `https://loopin.rumptycloud.ng/auth/callback`
 4. Keep `http://localhost:3000/auth/callback` for local dev
 
-## Step 6: Deploy
-
-1. Rumpty Cloud will automatically start building on Git push
-2. Monitor the deployment logs in the console
-3. Once deployed, you'll get a URL like: `https://loopin-<hash>.rumptycloud.ng`
-
-## Step 7: Custom Domain (Optional)
-
-1. In Rumpty Cloud dashboard → **Settings → Domains**
-2. Add your domain (e.g., `loopin.tadstech.dev`)
-3. Follow DNS instructions to point to Rumpty Cloud nameservers
-
-## Step 8: Test the Deployment
+### 4.3 Test the Deployment
 
 1. Open your Rumpty Cloud app URL
-2. Sign in with Google → should work if Supabase auth is configured
-3. Connect Google Calendar → should auto-refresh tokens
-4. Drop a note/screenshot → extraction should work
-5. Go to `/pricing` → should show plans (may show "payments finalising" notice until Bachs is fully configured)
+2. Sign in with Google → avatar appears in header (no "Sign in" flash)
+3. Drop a note or screenshot → events extract (skeleton cards while it works)
+4. Account menu → **Profile** → calendar shows **Connected**
+5. Open `/pricing` → plans render (may show "payments being finalised" notice until Bachs is fully configured)
 
-## Troubleshooting on Rumpty Cloud
+> **Done when**: Extraction works on the live URL, Google sign-in flows work, and the pricing page loads.
 
-| Issue | Fix |
-|-------|-----|
-| "Application Error" on deployment | Check build logs - usually missing env vars or build command mismatch |
-| Google sign-in loops | Verify Redirect URLs in Supabase match your Rumpty Cloud URL |
-| Calendar sync stops | Add GOOGLE_CLIENT_ID/SECRET so tokens can refresh |
-| Production shows old pages | Hard-refresh (`Ctrl+Shift+R`) - Rumpty Cloud updates on reload |
-| Database connection fails | Verify `SUPABASE_SECRET_KEY` and `NEXT_PUBLIC_SUPABASE_URL` are correct |
-| Bachs payment button shows notice | Set all 6 BACHS_PRODUCT_* env vars + Bachs webhook |
+---
 
-## Project Requirements & RAM Recommendations
+## 5. Self-Hosting Note
+
+> **Note for self-hosters**: Loopin is fully self-hostable. You can deploy to any platform that supports Next.js (Vercel, Netlify, traditional VPS, Cloudflare Pages, etc.). All environment variables documented in this guide can be adapted to your chosen platform.
+
+> The app uses:
+> - **Supabase** for database, auth, and RLS (you'll need your own Supabase project)
+> - **Bachs** for payments (create a free account at bachs.io)
+> - **Groq** or **OpenRouter** for AI extraction (API keys required)
+> - **Google Cloud** for OAuth (API keys required)
+
+> **Rumpty Cloud** is recommended for this hackathon because it provides:
+> - Free PostgreSQL database (no separate Supabase account needed for basic use)
+> - One-click deployment from Git
+> - Predictable free tier (5 full-stack apps)
+> - Eco-friendly infrastructure (~90% solar, Lagos-based)
+> - Pay-in-naira option
+> - Built-in deployment pipeline
+
+> If you choose a different platform, you'll need to:
+> 1. Set up your own Supabase project (free tier available at supabase.com)
+> 2. Configure Bachs payments with your own webhook endpoint
+> 3. Set up Google OAuth credentials
+> 4. Deploy your Next.js app to your chosen platform
+
+---
+
+## 6. RAM Recommendations
 
 ### What Loopin Needs to Run
 
-**Loopin** is a Next.js 16 app with these resource requirements:
-
 | Component | Resource Usage | Notes |
 |-----------|---------------|-------|
-| **Next.js server** | ~50-100MB RAM | Server Components + API routes |
-| **Supabase client** | ~20-30MB RAM | Database connections |
-| **Google Calendar API** | ~10-15MB RAM | OAuth flow, token refresh |
-| **Bachs checkout** | ~10-20MB RAM | Only on pricing page visits |
-| **Extraction AI (Groq/OpenRouter)** | ~30-50MB RAM | Per-request, not constant |
-| **Total baseline** | **~100-200MB RAM** | Idle state with signed-in user |
+| **Next.js server** | ~50-100 MB RAM | Server Components + API routes |
+| **Supabase client** | ~20-30 MB RAM | Database connections |
+| **Google Calendar API** | ~10-15 MB RAM | OAuth flow, token refresh (hourly) |
+| **Bacs checkout** | ~10-20 MB RAM | Only loaded on `/pricing` page visits |
+| **Extraction AI (Groq/OpenRouter)** | ~30-50 MB RAM | Per-request, not constant — uses burst memory |
+| **Total baseline** | **~100-200 MB RAM** | Idle state with signed-in user |
 
 ### Recommended RAM on Rumpty Cloud
 
-**For hackathon sprint:** **1GB RAM (minimum), 2GB RAM (recommended)**
+| Tier | RAM | When to Use |
+|------|-----|-------------|
+| **Minimum** | 1 GB | Single-user hackathon demo; sufficient for demo time |
+| **Recommended** | 2 GB | Comfortable margin; allows concurrent users, AI extraction calls |
+| **Paid upgrade** | 4-8 GB | If you need additional services or expect many concurrent users |
 
 **Rationale:**
-- The free tier on Rumpty Cloud typically starts at 1GB RAM for VM instances
-- Loopin's baseline is ~100-200MB, but you need headroom for:
+
+- The free tier on Rumpty Cloud typically starts at **1 GB RAM** for VM instances
+- Loopin's baseline is ~100-200 MB, but you need headroom for:
   - Concurrent users
   - AI extraction requests (Groq calls use burst memory)
   - Database connection pooling
-  - Supabase realtime subscriptions
   - Google OAuth token refresh operations
-- **1GB** is sufficient for a single-user hackathon demo
-- **2GB** provides comfortable margin and allows for additional features (workspaces, team mode)
+- **1 GB** is sufficient for a single-user hackathon demo
+- **2 GB** provides comfortable margin and allows for additional features
 - Rumpty Cloud's pricing scales: you can start free and upgrade as needed
 
-### If Using Managed Database (PostgreSQL)
-- **Memory impact**: Minimal - managed DB handles its own memory
-- **Connection pool**: Set `max_connections` to 20-30 for Next.js API routes
-- **Recommendation**: The free PostgreSQL playground handles up to 5 concurrent connections comfortably
+---
 
-### If Using Rumpty Cloud VM
-- **Free tier**: Typically 1GB RAM, 1 vCPU
-- **Paid tier**: 2GB-8GB RAM options available
-- **Start with**: 1GB, upgrade to 2GB if you need more concurrent users or want to run additional services (like Redis for caching)
+## 7. Hackathon-Specific Tips
 
-## Hackathon-Specific Tips
+| Tip | Details |
+|-----|---------|
+| **1. Use sandbox Bachs keys** | Never use live keys during hackathon |
+| **2. Free tier is generous** | 5 full-stack apps means you can test multiple variants |
+| **3. Pay in naira or dollars** | Choose whichever is more convenient for you |
+| **4. Eco-friendly bonus** | Rumpty Cloud runs on ~90% solar power from Lagos |
+| **5. Local testing** | Use `bun dev` locally, then push to Rumpty Cloud for production |
+| **6. Single-slash webhook URL** | A `//` in the URL gets a 308 from Vercel and delivery dies at the edge |
+| **7. Event source → Account events** | "Connected account events" makes auto-delivery route nothing; manual Retry still works |
 
-1. **Use sandbox Bachs keys** - never use live keys during hackathon
-2. **Free tier is generous** - 5 full-stack apps means you can test multiple variants
-3. **Pay in naira or dollars** - choose whichever is more convenient for you
-4. **Eco-friendly bonus** - Rumpty Cloud runs on ~90% solar power from Lagos
-5. **Local testing** - use `bun dev` locally, then push to Rumpty Cloud for production
+---
 
-## Commands to Know
+## 8. Commands to Know
 
 ```bash
 # Local development
@@ -193,15 +253,36 @@ bun dev
 bun run build
 
 # Test cron endpoint (needs CRON_SECRET)
-curl https://your-app.rumptycloud.ng/api/cron/reminders -H "Authorization: Bearer $CRON_SECRET"
+curl https://your-app.rumptycloud.ng/api/cron/reminders \
+  -H "Authorization: Bearer $CRON_SECRET"
+
+# Deploy to Rumpty Cloud (from console — automatic on git push)
+# No CLI command needed — just push to your connected GitHub repo
+
+# Verify deployment
+open https://loopin-<hash>.rumptycloud.ng
+
+# Local only — test extraction
+echo '{"text":"Team standup Friday 9am at the office","timezone":"Africa/Lagos"}'
 ```
-
-## Need Help?
-
-- **Rumpty Cloud support**: Use the in-app chat or email support@rumptycloud.ng
-- **Loopin-specific issues**: Check `SETUP.md` or `AGENTS.md` in this repo
-- **Bachs payments**: Refer to `lib/bachs.ts` and `lib/payments.ts`
 
 ---
 
-*Last updated: October 2026 - for hackathon deployment*
+## 9. Need Help?
+
+| Support Channel | Details |
+|----------------|---------|
+| **Rumpty Cloud** | In-app chat or email: `support@rumptycloud.ng` |
+| **Loopin-specific** | Check `SETUP.md` or `AGENTS.md` in this repo |
+| **Bachs payments** | Refer to `lib/bachs.ts` and `lib/payments.ts` |
+| **Google OAuth** | `verification.md` has Google Cloud consent screen details |
+
+---
+
+## 📅 Last Updated
+
+**October 2026** — for hackathon deployment
+
+*Loopin v3 — AI calendar event extraction & Google Calendar sync*
+
+---
