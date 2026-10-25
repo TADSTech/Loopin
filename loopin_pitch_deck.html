@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b57d0">
+  <title>loopin — Talent Nation AI Rebuild Challenge Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* loopin pitch deck — Material theme, tokens mirror app/globals.css
+     * h-screen slides, no scrolling on desktop presentation viewports
+     * light slides + dark (#131314) accent slides for Hook & Finale */
+
+    :root{
+      --bg:#ffffff;
+      --fg:#1f1f1f;
+      --primary:#0b57d0;
+      --primary-hover:#0a4fbc;
+      --primary-soft:#e8f0fe;
+      --primary-border:#c6dafc;
+      --on-primary:#ffffff;
+
+      --muted:#5f6368;
+      --surface:#ffffff;
+      --surface-muted:#f1f3f4;
+      --border:#e5e7eb;
+      --border-strong:#dadce0;
+
+      --error:#d93025;
+      --error-soft:#fce8e6;
+      --error-border:#f6c7c1;
+
+      --green:#0f9d58;
+      --green-soft:#e6f4ea;
+      --yellow:#e37400;
+      --yellow-soft:#fef7e0;
+      --purple:#ab47bc;
+      --purple-soft:#f3e8fd;
+      --teal:#00838f;
+      --teal-soft:#e0f7fa;
+
+      --dark-bg:#131314;
+      --dark-fg:#e8eaed;
+      --dark-surface:#1f1f1f;
+      --dark-border:#3c4043;
+      --dark-primary:#8ab4f8;
+      --dark-muted:#9aa0a6;
+
+      --radius:18px;
+      --radius-sm:12px;
+      --shadow:0 1px 6px rgba(32,33,36,.12), 0 10px 28px rgba(32,33,36,.07);
+
+      --header-h:52px;
+      --dock-h:40px;
+
+      --font:'Roboto', Arial, Helvetica, sans-serif;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;padding:0;overflow:hidden}
+    body{
+      display:flex;
+      flex-direction:column;
+      background:var(--bg);
+      color:var(--fg);
+      font-family:var(--font);
+      font-size:16px;
+      line-height:1.5;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    ::selection{background:var(--primary-soft);color:var(--primary)}
+    a{color:inherit}
+    button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+    h1,h2,h3{margin:0;line-height:1.08;letter-spacing:-.02em;font-weight:700}
+    p{margin:0}
+
+    /* ============================ chrome ============================ */
+    header.top{
+      flex:none;
+      height:var(--header-h);
+      background:var(--surface);
+      border-bottom:1px solid var(--border);
+      position:relative;
+      z-index:30;
+    }
+    .top-inner{
+      height:100%;
+      max-width:1440px;
+      margin:0 auto;
+      padding:0 clamp(14px,2vw,28px);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--fg)}
+    .brand-mark{
+      width:32px;height:32px;border-radius:50%;
+      background:var(--primary-soft);
+      display:grid;place-items:center;
+      flex:none;
+    }
+    .brand-mark svg{width:18px;height:18px;stroke:var(--primary);fill:none;stroke-width:2}
+    .brand-name{font-weight:700;font-size:19px;letter-spacing:-.03em}
+    .brand-tag{
+      font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+      color:var(--primary);background:var(--primary-soft);
+      border-radius:999px;padding:4px 10px;
+      white-space:nowrap;
+    }
+    .top-right{display:flex;align-items:center;gap:8px}
+    .slide-title-pill{
+      font-size:12.5px;font-weight:500;color:var(--muted);
+      background:var(--surface-muted);
+      border-radius:999px;padding:6px 14px;
+      white-space:nowrap;
+    }
+    .slide-count{
+      font-size:12.5px;font-weight:500;color:var(--primary);
+      background:var(--primary-soft);
+      border-radius:999px;padding:6px 14px;
+      white-space:nowrap;
+    }
+    .slide-count b{font-weight:700}
+    .nav-btn{
+      width:34px;height:34px;border-radius:50%;
+      border:1px solid var(--border-strong);
+      display:grid;place-items:center;
+      color:var(--fg);background:var(--surface);
+      font-size:15px;
+      transition:background-color .15s ease, border-color .15s ease, color .15s ease;
+    }
+    .nav-btn:hover:not(:disabled){background:var(--primary-soft);border-color:var(--primary-border);color:var(--primary)}
+    .nav-btn:disabled{opacity:.35;cursor:default}
+    .nav-btn:focus-visible,.fs-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+    .progress-track{
+      position:absolute;left:0;right:0;bottom:-3px;height:3px;
+      background:var(--primary-soft);
+    }
+    .progress-fill{height:100%;background:var(--primary);width:10%;transition:width .3s var(--ease, cubic-bezier(.16,1,.3,1))}
+
+    /* ============================ stage ============================ */
+    main.deck{
+      flex:1;
+      min-height:0;
+      position:relative;
+      overflow:hidden;
+      background:var(--bg);
+    }
+    .slide{
+      position:absolute;
+      inset:0;
+      display:none;
+      overflow:hidden;              /* hard no-scroll on desktop */
+      background:var(--bg);
+    }
+    .slide.active{display:block;animation:fade .32s cubic-bezier(.16,1,.3,1)}
+    @keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+    .slide-inner{
+      position:relative;
+      z-index:1;
+      height:100%;
+      max-width:1240px;
+      margin:0 auto;
+      padding:clamp(16px,3vh,36px) clamp(20px,3vw,48px);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:clamp(14px,2.8vh,30px);
+      min-height:0;
+    }
+
+    /* subtle decorative glow */
+    .slide::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(640px 380px at 88% -10%, rgba(11,87,208,.07), transparent 70%),
+        radial-gradient(520px 340px at -8% 108%, rgba(11,87,208,.05), transparent 70%);
+    }
+    .slide.dark{background:var(--dark-bg);color:var(--dark-fg)}
+    .slide.dark::before{
+      background:
+        radial-gradient(680px 460px at 84% 8%, rgba(138,180,248,.22), transparent 70%),
+        radial-gradient(560px 420px at 6% 96%, rgba(11,87,208,.35), transparent 72%);
+    }
+
+    /* ============================ head ============================ */
+    .slide-head{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(8px,1.6vh,16px)}
+    .slide-head.center{align-items:center;text-align:center}
+    .eyebrow{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--primary-soft);color:var(--primary);
+      font-size:clamp(10px,1.5vh,12px);font-weight:500;
+      letter-spacing:.16em;text-transform:uppercase;
+      border-radius:999px;padding:6px 14px;
+    }
+    .eyebrow .pulse{width:7px;height:7px;border-radius:50%;background:var(--primary);flex:none}
+    .dark .eyebrow{background:rgba(138,180,248,.16);color:var(--dark-primary)}
+    .dark .eyebrow .pulse{background:var(--dark-primary)}
+    .slide-head h1{font-size:clamp(34px,6.4vh,72px);font-weight:900}
+    .slide-head h2{font-size:clamp(28px,4.9vh,56px);font-weight:900}
+    .slide-head .lede{
+      color:var(--muted);
+      font-size:clamp(13.5px,2vh,17.5px);
+      max-width:64ch;
+    }
+    .slide-head.center .lede{margin:0 auto}
+    .dark .slide-head .lede{color:var(--dark-muted)}
+    .accent-word{color:var(--primary)}
+    .dark .accent-word{color:var(--dark-primary)}
+
+    /* ============================ grids / cards ============================ */
+    .grid{display:grid;gap:clamp(12px,2vh,20px)}
+    .g2{grid-template-columns:repeat(2,1fr)}
+    .g3{grid-template-columns:repeat(3,1fr)}
+    .g4{grid-template-columns:repeat(4,1fr)}
+
+    .card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:clamp(14px,2.2vh,24px);
+      box-shadow:var(--shadow);
+      display:flex;
+      flex-direction:column;
+      gap:clamp(8px,1.4vh,14px);
+      min-height:0;
+    }
+    .card.blue{background:var(--primary-soft);border-color:var(--primary-border);box-shadow:none}
+    .card.red{background:var(--error-soft);border-color:var(--error-border);box-shadow:none}
+    .card.green{background:var(--green-soft);border-color:#ceead6;box-shadow:none}
+    .card.yellow{background:var(--yellow-soft);border-color:#fde293;box-shadow:none}
+    .card.purple{background:var(--purple-soft);border-color:#e9cbf7;box-shadow:none}
+    .card.teal{background:var(--teal-soft);border-color:#c2e8ea;box-shadow:none}
+    .card.muted{background:var(--surface-muted);border-color:var(--border);box-shadow:none}
+
+    .icon{
+      width:clamp(36px,5vh,46px);
+      height:clamp(36px,5vh,46px);
+      border-radius:var(--radius-sm);
+      display:grid;place-items:center;
+      font-size:clamp(17px,2.6vh,22px);
+      background:var(--primary-soft);
+      flex:none;
+    }
+    .icon.red{background:var(--error-soft)}
+    .icon.green{background:var(--green-soft)}
+    .icon.yellow{background:var(--yellow-soft)}
+    .icon.purple{background:var(--purple-soft)}
+    .icon.teal{background:var(--teal-soft)}
+    .icon.solid{background:var(--primary);font-size:clamp(15px,2.2vh,18px)}
+    .icon.circle{border-radius:50%}
+    .dark .icon{background:rgba(138,180,248,.16)}
+
+    .card h3{font-size:clamp(15px,2.2vh,19px);font-weight:700}
+    .card p{color:var(--muted);font-size:clamp(12.5px,1.7vh,14.5px);line-height:1.55}
+    .dark .card{background:var(--dark-surface);border-color:var(--dark-border);box-shadow:none}
+    .dark .card p{color:var(--dark-muted)}
+    .card-num{
+      font-size:11px;font-weight:700;letter-spacing:.16em;
+      color:var(--primary);text-transform:uppercase;
+    }
+    .dark .card-num{color:var(--dark-primary)}
+    .card code{
+      font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+      font-size:.88em;background:var(--surface-muted);
+      border:1px solid var(--border);
+      padding:1px 6px;border-radius:6px;color:var(--fg);
+    }
+    .card.blue code{background:rgba(255,255,255,.7);border-color:var(--primary-border)}
+
+    /* ============================ buttons ============================ */
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      border-radius:999px;
+      padding:clamp(10px,1.6vh,14px) clamp(20px,2.4vw,30px);
+      font-size:clamp(13px,1.8vh,15px);
+      font-weight:500;
+      text-decoration:none;
+      transition:background-color .15s ease, border-color .15s ease, transform .1s ease, box-shadow .15s ease;
+      white-space:nowrap;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn:focus-visible{outline:2px solid var(--primary);outline-offset:3px}
+    .btn.primary{background:var(--primary);color:var(--on-primary);box-shadow:0 1px 6px rgba(11,87,208,.35)}
+    .btn.primary:hover{background:var(--primary-hover)}
+    .btn.ghost{border:1px solid var(--border-strong);color:var(--fg);background:var(--surface)}
+    .btn.ghost:hover{background:var(--primary-soft);border-color:var(--primary-border);color:var(--primary)}
+    .btn.solid-light{background:var(--dark-primary);color:#202124;font-weight:700}
+    .btn.solid-light:hover{background:#aecbfa}
+    .btn.ghost-dark{border:1px solid #5f6368;color:var(--dark-fg);background:transparent}
+    .btn.ghost-dark:hover{background:rgba(138,180,248,.14);border-color:var(--dark-primary);color:var(--dark-primary)}
+    .btn:disabled{opacity:.45;cursor:default}
+
+    /* ============================ 01 hook ============================ */
+    .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(20px,4vw,64px);align-items:center}
+    .hero-copy{display:flex;flex-direction:column;align-items:flex-start;gap:clamp(10px,2vh,20px)}
+    .hero-copy .lede{color:var(--dark-muted);font-size:clamp(14px,2.1vh,18px);max-width:46ch}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:4px}
+    .hero-cards{display:grid;gap:clamp(10px,1.8vh,16px)}
+    .hero-card{
+      background:var(--dark-surface);
+      border:1px solid var(--dark-border);
+      border-radius:var(--radius);
+      padding:clamp(13px,2.2vh,20px) clamp(15px,2.2vw,24px);
+      display:flex;align-items:center;gap:16px;
+    }
+    .hero-card h3{font-size:clamp(15px,2.3vh,19px);color:var(--dark-fg)}
+    .hero-card p{font-size:clamp(12px,1.7vh,14px);color:var(--dark-muted);margin-top:3px}
+    .hero-card .icon{background:rgba(138,180,248,.16)}
+
+    /* ============================ 03 steps ============================ */
+    .step-id{
+      font-size:10.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+      color:var(--primary);
+    }
+    .card.green .step-id{color:var(--green)}
+    .card.blue .step-id{color:var(--primary)}
+    .step-foot{
+      margin-top:auto;
+      border-top:1px solid rgba(31,31,31,.1);
+      padding-top:clamp(8px,1.4vh,12px);
+      font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+      font-size:11px;color:var(--muted);letter-spacing:.03em;
+    }
+    .card.blue .step-foot{border-top-color:var(--primary-border);color:var(--primary)}
+    .card.green .step-foot{border-top-color:#ceead6;color:var(--green)}
+    .step-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+    .step-glyph{font-size:clamp(18px,2.6vh,24px)}
+
+    /* ============================ 04 tech ============================ */
+    .tech-head{display:flex;align-items:center;gap:12px}
+    .tech-name{font-weight:700;font-size:clamp(14px,2vh,17px);letter-spacing:-.01em}
+    .tech-role{
+      font-size:10.5px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;
+      color:var(--muted);margin-top:2px;
+    }
+
+    /* ============================ 05 contrast ============================ */
+    .contrast{
+      border-radius:var(--radius);
+      padding:clamp(15px,2.4vh,26px);
+      display:flex;flex-direction:column;gap:clamp(10px,1.8vh,16px);
+      min-height:0;
+    }
+    .contrast.old{background:var(--error-soft);border:1px solid var(--error-border)}
+    .contrast.new{background:var(--primary-soft);border:1px solid var(--primary-border)}
+    .contrast-label{
+      align-self:flex-start;
+      font-size:clamp(10px,1.5vh,11.5px);font-weight:700;
+      letter-spacing:.14em;text-transform:uppercase;
+      border-radius:999px;padding:5px 12px;
+    }
+    .contrast.old .contrast-label{background:#fff;color:var(--error);border:1px solid var(--error-border)}
+    .contrast.new .contrast-label{background:var(--primary);color:#fff}
+    .contrast ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(8px,1.5vh,14px)}
+    .contrast li{display:flex;gap:11px;font-size:clamp(12.5px,1.8vh,15px);line-height:1.5;align-items:flex-start}
+    .mark{
+      width:19px;height:19px;border-radius:50%;flex:none;margin-top:1px;
+      display:grid;place-items:center;font-size:11px;font-weight:700;
+    }
+    .contrast.old .mark{background:#fff;color:var(--error);border:1px solid var(--error-border)}
+    .contrast.new .mark{background:var(--primary);color:#fff}
+    .contrast li strong{font-weight:700}
+
+    /* ============================ 06 / 07 people ============================ */
+    .person{text-align:center;align-items:center}
+    .person .icon{border-radius:50%;font-size:clamp(19px,3vh,26px);width:clamp(44px,6.5vh,58px);height:clamp(44px,6.5vh,58px)}
+
+    /* ============================ 08 pricing ============================ */
+    .pricing-selector{
+      display:inline-flex;
+      background:var(--surface-muted);
+      border:1px solid var(--border);
+      border-radius:999px;
+      padding:4px;
+      gap:4px;
+    }
+    .pricing-selector button{
+      border-radius:999px;
+      padding:7px 20px;
+      font-size:13px;font-weight:500;
+      color:var(--muted);
+      transition:background-color .15s ease, color .15s ease;
+    }
+    .pricing-selector button.active{background:var(--primary);color:#fff;font-weight:700}
+    .pricing-selector button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+    .price-card{
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:clamp(15px,2.4vh,26px);
+      box-shadow:var(--shadow);
+      display:flex;flex-direction:column;
+      gap:clamp(8px,1.5vh,14px);
+      position:relative;
+    }
+    .price-card.pro{
+      border:2px solid var(--primary);
+      background:linear-gradient(180deg, var(--primary-soft), #ffffff 55%);
+      box-shadow:0 2px 10px rgba(11,87,208,.18), 0 14px 34px rgba(11,87,208,.12);
+      transform:scale(1.02);
+    }
+    .popular{
+      position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+      background:var(--primary);color:#fff;
+      font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+      border-radius:999px;padding:5px 14px;white-space:nowrap;
+      box-shadow:0 2px 8px rgba(11,87,208,.4);
+    }
+    .price-tier{
+      font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+      color:var(--muted);
+    }
+    .price-card.pro .price-tier{color:var(--primary)}
+    .price{
+      font-size:clamp(30px,4.6vh,44px);
+      font-weight:900;letter-spacing:-.03em;line-height:1;
+    }
+    .price small{font-size:.35em;font-weight:500;color:var(--muted);letter-spacing:0}
+    .price-sub{font-size:clamp(12px,1.6vh,13.5px);color:var(--muted)}
+    .price ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:clamp(6px,1.1vh,10px)}
+    .price li{display:flex;gap:9px;align-items:flex-start;font-size:clamp(12.5px,1.7vh,14.5px);line-height:1.45}
+    .check{
+      width:17px;height:17px;border-radius:5px;flex:none;margin-top:1px;
+      background:var(--surface-muted);border:1px solid var(--border-strong);
+      display:grid;place-items:center;
+    }
+    .check::before{content:"✓";font-size:10px;font-weight:700;color:var(--muted);line-height:1}
+    .price-card.pro .check{background:var(--primary);border-color:var(--primary)}
+    .price-card.pro .check::before{color:#fff}
+    .price-card .btn{width:100%;margin-top:auto}
+
+    /* ============================ 09 demo ============================ */
+    .demo-panel{
+      width:100%;
+      max-width:980px;
+      margin:0 auto;
+      background:var(--surface);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:clamp(14px,2.2vh,22px);
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:clamp(12px,2vh,20px);
+      align-content:start;
+    }
+    .demo-side label{
+      display:block;
+      font-size:10.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+      color:var(--muted);margin-bottom:8px;
+    }
+    .demo-input{
+      background:var(--primary-soft);
+      border:1.5px dashed var(--primary-border);
+      border-radius:var(--radius-sm);
+      padding:clamp(12px,2vh,18px);
+      cursor:pointer;
+      transition:border-color .15s ease, background-color .15s ease, transform .1s ease;
+      min-height:clamp(110px,17vh,150px);
+    }
+    .demo-input:hover{border-color:var(--primary);background:#dde9fd}
+    .demo-input:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+    .demo-input .fname{font-weight:700;font-size:clamp(12.5px,1.8vh,14.5px);color:var(--fg)}
+    .demo-input .ftext{
+      font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+      font-size:clamp(10.5px,1.5vh,12px);color:var(--muted);
+      margin-top:6px;line-height:1.55;
+    }
+    .demo-input .hint{
+      margin-top:10px;font-size:clamp(11px,1.6vh,13px);font-weight:700;color:var(--primary);
+      display:flex;align-items:center;gap:6px;
+    }
+    .demo-output{
+      background:var(--dark-bg);
+      color:var(--dark-fg);
+      border-radius:var(--radius-sm);
+      padding:clamp(12px,2vh,18px);
+      min-height:clamp(110px,17vh,150px);
+      display:flex;flex-direction:column;justify-content:center;
+      font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+      font-size:clamp(11px,1.6vh,13px);
+      color:var(--dark-muted);
+      line-height:1.55;
+      overflow:hidden;
+    }
+    .demo-output .entry{font-size:clamp(11.5px,1.65vh,13.5px);color:var(--dark-fg);width:100%}
+    .demo-output .entry .head{
+      display:flex;justify-content:space-between;align-items:center;
+      font-weight:700;color:var(--dark-primary);
+      letter-spacing:.1em;text-transform:uppercase;font-size:clamp(9.5px,1.4vh,11px);
+      margin-bottom:8px;
+    }
+    .demo-output .erow{display:flex;gap:10px;margin-top:4px}
+    .demo-output .ekey{color:#8ab4f8;min-width:46px;font-weight:700}
+    .spinner{
+      width:16px;height:16px;border-radius:50%;
+      border:2px solid var(--dark-border);
+      border-top-color:var(--dark-primary);
+      animation:spin .8s linear infinite;
+      margin:0 auto 10px;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .demo-foot{
+      grid-column:1 / -1;
+      display:flex;justify-content:space-between;align-items:center;gap:14px;
+      border-top:1px solid var(--border);
+      padding-top:clamp(10px,1.6vh,14px);
+      flex-wrap:wrap;
+    }
+    .demo-status{display:inline-flex;align-items:center;gap:8px;font-size:clamp(11px,1.6vh,13px);color:var(--muted)}
+    .demo-status .live-dot{
+      width:9px;height:9px;border-radius:50%;background:var(--green);
+      box-shadow:0 0 0 3px rgba(15,157,88,.18);
+    }
+    .sync-btn{
+      border-radius:999px;
+      border:1px solid var(--border-strong);
+      background:var(--surface-muted);
+      color:var(--muted);
+      padding:clamp(9px,1.5vh,12px) clamp(16px,2vw,24px);
+      font-size:clamp(12px,1.7vh,14px);font-weight:500;
+      display:inline-flex;align-items:center;gap:8px;
+      transition:all .15s ease;
+    }
+    .sync-btn:disabled{opacity:.5;cursor:default}
+    .sync-btn.ready{
+      background:var(--primary);border-color:var(--primary);color:#fff;font-weight:700;
+      box-shadow:0 1px 6px rgba(11,87,208,.35);
+    }
+    .sync-btn.done{
+      background:var(--green-soft);border-color:#ceead6;color:var(--green);font-weight:700;
+    }
+    .sync-btn:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+    /* ============================ 10 finale ============================ */
+    .finale{
+      display:flex;flex-direction:column;align-items:center;text-align:center;
+      gap:clamp(10px,2vh,20px);
+      max-width:860px;margin:0 auto;
+    }
+    .finale h2{font-size:clamp(34px,6.6vh,76px);font-weight:900;color:var(--dark-fg)}
+    .finale .lede{color:var(--dark-muted);font-size:clamp(14px,2.2vh,19px);max-width:52ch;margin:0 auto}
+    .qrcode{
+      background:#fff;
+      border-radius:var(--radius);
+      padding:12px;
+      width:clamp(120px,19vh,170px);
+      aspect-ratio:1;
+      display:grid;place-items:center;
+      box-shadow:0 14px 40px rgba(0,0,0,.5);
+    }
+    .qrcode img{width:100%;height:100%;object-fit:contain;display:block;border-radius:8px}
+    .qrcode .fallback{
+      display:none;
+      font-family:ui-monospace,Menlo,Consolas,monospace;
+      font-size:11px;color:var(--muted);text-align:center;padding:6px;
+      word-break:break-all;
+    }
+    .finale-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+    .finale-pill{
+      display:inline-flex;align-items:center;gap:7px;
+      background:rgba(138,180,248,.16);color:var(--dark-primary);
+      border:1px solid rgba(138,180,248,.4);
+      border-radius:999px;
+      padding:7px 16px;
+      font-size:clamp(11.5px,1.7vh,14px);font-weight:500;
+    }
+
+    /* ============================ dock ============================ */
+    footer.dock{
+      flex:none;
+      height:var(--dock-h);
+      background:var(--surface);
+      border-top:1px solid var(--border);
+      display:flex;align-items:center;
+      z-index:30;
+    }
+    .dock-inner{
+      width:100%;max-width:1440px;margin:0 auto;
+      padding:0 clamp(14px,2vw,28px);
+      display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:16px;
+    }
+    .dock-left,.dock-right{font-size:11.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .dock-right{text-align:right}
+    .dock-left a{color:var(--muted);text-decoration:none}
+    .dock-left a:hover{color:var(--primary)}
+    .dot-nav{display:flex;gap:7px;justify-content:center}
+    .dot-nav button{
+      width:8px;height:8px;border-radius:50%;
+      background:var(--border-strong);
+      padding:0;
+      transition:background-color .15s ease, transform .15s ease;
+    }
+    .dot-nav button:hover{background:var(--primary-border);transform:scale(1.25)}
+    .dot-nav button.active{background:var(--primary);transform:scale(1.3)}
+    .dot-nav button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+
+    /* ============================ responsive ============================ */
+    @media (max-width:1060px){
+      .g4{grid-template-columns:repeat(2,1fr)}
+      .slide-title-pill{display:none}
+    }
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;gap:20px}
+      .g3{grid-template-columns:repeat(2,1fr)}
+      .demo-panel{grid-template-columns:1fr}
+      .dock-right{display:none}
+      .dock-inner{grid-template-columns:1fr auto}
+    }
+    /* safety valve: below presentation sizes, allow scroll instead of clipping */
+    @media (max-width:760px), (max-height:540px){
+      html,body{overflow:auto}
+      .slide{position:relative;inset:auto;min-height:100%;overflow:visible}
+      main.deck{overflow:visible}
+      .g2,.g3,.g4{grid-template-columns:1fr}
+      .price-card.pro{transform:none}
+      .brand-tag{display:none}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .slide{animation:none}
+      *{transition:none !important}
+      .spinner{animation-duration:2s}
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top">
+    <div class="top-inner">
+      <a class="brand" href="#" aria-label="loopin pitch deck" onclick="goToSlide(1);return false;">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M8.5 15c-2.5 0-4-1.6-4-3.5S6 8 8.5 8C12 8 13 16 16.5 16c2.2 0 3.5-1.6 3.5-3.5S18.7 9 16.5 9C13.5 9 12.5 16 8.5 16"/></svg>
+        </span>
+        <span class="brand-name">loopin</span>
+        <span class="brand-tag">Pitch Deck 2026</span>
+      </a>
+      <div class="top-right">
+        <span class="slide-title-pill" id="slide-title">The Hook</span>
+        <span class="slide-count"><b id="slide-num">01</b> / 10</span>
+        <button class="nav-btn" id="prev-btn" type="button" aria-label="Previous slide" disabled>←</button>
+        <button class="nav-btn" id="next-btn" type="button" aria-label="Next slide">→</button>
+        <button class="nav-btn" id="fs-btn" type="button" aria-label="Toggle fullscreen">⛶</button>
+      </div>
+    </div>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="progress"></div></div>
+  </header>
+
+  <main class="deck" id="main">
+
+    <!-- 01 · HOOK (dark) -->
+    <section class="slide dark active" data-slide="1" aria-label="The Hook">
+      <div class="slide-inner">
+        <div class="hero">
+          <div class="hero-copy">
+            <span class="eyebrow"><span class="pulse"></span>Talent Nation AI Rebuild Challenge 2026</span>
+            <h1>Stop typing events.<br><span class="accent-word">Drop the flyer.</span></h1>
+            <p class="lede">WhatsApp screenshots, event flyers, and group-chats sit unread because entering their dates and venues by hand takes too long. loopin reads them and writes them straight to your calendar.</p>
+            <div class="hero-actions">
+              <button class="btn solid-light" type="button" onclick="goToSlide(2)">Explore the pitch →</button>
+              <a class="btn ghost-dark" href="https://loopin.tadstech.dev" target="_blank" rel="noopener">loopin.tadstech.dev</a>
+            </div>
+          </div>
+          <div class="hero-cards" aria-label="Highlights">
+            <div class="hero-card">
+              <span class="icon" aria-hidden="true">🖼️</span>
+              <div><h3>Multimodal Vision AI</h3><p>Reads flyers & screenshots, not just text.</p></div>
+            </div>
+            <div class="hero-card">
+              <span class="icon" aria-hidden="true">🔗</span>
+              <div><h3>1-Click Google Sync</h3><p>OAuth-backed, no credentials exposed.</p></div>
+            </div>
+            <div class="hero-card">
+              <span class="icon" aria-hidden="true">⚡</span>
+              <div><h3>Instant Execution</h3><p>Structured calendar data in under a second.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 · PROBLEM -->
+    <section class="slide" data-slide="2" aria-label="The Problem">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>The Pain Point</span>
+          <h2>Manual scheduling is chaos.</h2>
+          <p class="lede">Life is images and conversations — but calendars only accept structured data.</p>
+        </div>
+        <div class="grid g3">
+          <div class="card blue">
+            <span class="icon" aria-hidden="true">⌨️</span>
+            <span class="card-num">01 · Friction</span>
+            <h3>Too much typing</h3>
+            <p>Opening the calendar, toggling dates, fixing timezones, pasting addresses, and typing titles takes about two minutes per event.</p>
+          </div>
+          <div class="card yellow">
+            <span class="icon" aria-hidden="true">🕳️</span>
+            <span class="card-num" style="color:var(--yellow)">02 · Missed</span>
+            <h3>Missed opportunities</h3>
+            <p>Because typing it in is tedious, people defer it. Screenshots get buried in galleries — hackathons, meetups, and webinars get missed.</p>
+          </div>
+          <div class="card red">
+            <span class="icon red" aria-hidden="true">🗂️</span>
+            <span class="card-num" style="color:var(--error)">03 · Chaos</span>
+            <h3>Unstructured text</h3>
+            <p>Flyer copy and chat notes are messy: vague phrases like “this coming Wednesday”, mixed time formats, and long address directions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · SOLUTION -->
+    <section class="slide" data-slide="3" aria-label="Our Solution">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>The Magic Solution</span>
+          <h2>What <span class="accent-word">loopin</span> does.</h2>
+          <p class="lede">Drop a flyer screenshot or paste raw text — multimodal AI extracts the event and writes it to your calendar.</p>
+        </div>
+        <div class="grid g3">
+          <div class="card">
+            <div class="step-head">
+              <span class="step-id">Step 01</span>
+              <span class="step-glyph" aria-hidden="true">📥</span>
+            </div>
+            <h3>Drop any content</h3>
+            <p>Drag in up to three event flyers or schedule screenshots, or paste raw chat text straight into the box.</p>
+            <div class="step-foot">JPEG · PNG · WEBP · raw text</div>
+          </div>
+          <div class="card blue">
+            <div class="step-head">
+              <span class="step-id">Step 02</span>
+              <span class="step-glyph" aria-hidden="true">✨</span>
+            </div>
+            <h3>Multimodal AI extraction</h3>
+            <p>AI reads images and text together, structuring dates, start and end times, venues, and descriptions with high precision.</p>
+            <div class="step-foot">Zod runtime schema validation</div>
+          </div>
+          <div class="card green">
+            <div class="step-head">
+              <span class="step-id">Step 03</span>
+              <span class="step-glyph" aria-hidden="true">📅</span>
+            </div>
+            <h3>1-click calendar sync</h3>
+            <p>Sync directly to Google Calendar with automatic OAuth background refresh. No credentials exposed.</p>
+            <div class="step-foot">Google Calendar API integration</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · BUILD -->
+    <section class="slide" data-slide="4" aria-label="How We Built It">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>The Engine Under The Hood</span>
+          <h2>How we built it.</h2>
+          <p class="lede">A modern web stack built for speed and constrained security.</p>
+        </div>
+        <div class="grid g3">
+          <div class="card">
+            <div class="tech-head">
+              <span class="icon" aria-hidden="true">▲</span>
+              <div><div class="tech-name">Next.js 16 + React 19</div><div class="tech-role">Core framework</div></div>
+            </div>
+            <p>App Router with Server Actions for zero client-bundle bloat and instant form mutations.</p>
+          </div>
+          <div class="card">
+            <div class="tech-head">
+              <span class="icon yellow" aria-hidden="true">◉</span>
+              <div><div class="tech-name">Groq + OpenAI SDK</div><div class="tech-role">Multimodal AI</div></div>
+            </div>
+            <p>Low-latency Llama vision models on Groq endpoints finish extraction in under a second.</p>
+          </div>
+          <div class="card">
+            <div class="tech-head">
+              <span class="icon green" aria-hidden="true">⬡</span>
+              <div><div class="tech-name">Supabase Backend</div><div class="tech-role">Database + OAuth</div></div>
+            </div>
+            <p>Postgres with Row Level Security (RLS) and Google OAuth token refresh handled server-side.</p>
+          </div>
+          <div class="card">
+            <div class="tech-head">
+              <span class="icon purple" aria-hidden="true">◆</span>
+              <div><div class="tech-name">Zod Schema Guard</div><div class="tech-role">Data integrity</div></div>
+            </div>
+            <p>Runtime validation keeps AI responses inside the structured calendar payload spec.</p>
+          </div>
+          <div class="card">
+            <div class="tech-head">
+              <span class="icon red" aria-hidden="true">⚡</span>
+              <div><div class="tech-name">Bun Runtime</div><div class="tech-role">Tooling + tests</div></div>
+            </div>
+            <p>Fast Bun runtime runs the unit tests and pre-commit hooks before each release.</p>
+          </div>
+          <div class="card">
+            <div class="tech-head">
+              <span class="icon teal" aria-hidden="true">▦</span>
+              <div><div class="tech-name">Tailwind CSS v4</div><div class="tech-role">System design</div></div>
+            </div>
+            <p>Calm, high-contrast layout with container queries and light/dark theme switching.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · CONTRAST -->
+    <section class="slide" data-slide="5" aria-label="Reimagining Calendars">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>The AI Rebuild Shift</span>
+          <h2>Reimagining the calendar.</h2>
+          <p class="lede">From a passive grid to an active, self-populating timeline.</p>
+        </div>
+        <div class="grid g2">
+          <div class="contrast old">
+            <span class="contrast-label">The Old Way · Passive Grid</span>
+            <ul>
+              <li><span class="mark" aria-hidden="true">✕</span><span>You are the data-entry clerk manually filling form fields.</span></li>
+              <li><span class="mark" aria-hidden="true">✕</span><span>Screenshots and chat messages live separately from your schedule.</span></li>
+              <li><span class="mark" aria-hidden="true">✕</span><span>High mental load: double-checking timezones and locations.</span></li>
+              <li><span class="mark" aria-hidden="true">✕</span><span>Isolated utility: just a personal diary, no integrations.</span></li>
+            </ul>
+          </div>
+          <div class="contrast new">
+            <span class="contrast-label">The loopin Way · Active Target</span>
+            <ul>
+              <li><span class="mark" aria-hidden="true">✓</span><span><strong>Zero typing:</strong> drop visual flyers and let AI structure the data.</span></li>
+              <li><span class="mark" aria-hidden="true">✓</span><span><strong>Direct bridge:</strong> real-world conversations → Google Calendar in one click.</span></li>
+              <li><span class="mark" aria-hidden="true">✓</span><span><strong>Lead-gen + sharing:</strong> gated extractions and shareable event pages.</span></li>
+              <li><span class="mark" aria-hidden="true">✓</span><span><strong>Developer surface:</strong> API keys, signed webhooks, shared workspaces.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 06 · FEATURES -->
+    <section class="slide" data-slide="6" aria-label="Platform Features">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>Full Feature Surface</span>
+          <h2>More than an extractor.</h2>
+          <p class="lede">A platform for consumers, event hosts, and software teams.</p>
+        </div>
+        <div class="grid g4">
+          <div class="card blue">
+            <span class="icon solid" aria-hidden="true">↗</span>
+            <h3>Lead-Gen Gate</h3>
+            <p>Shows extracted event data behind a short sign-up prompt to convert casual visitors into registered accounts.</p>
+          </div>
+          <div class="card green">
+            <span class="icon green" aria-hidden="true">🌍</span>
+            <h3>Public Event Pages</h3>
+            <p>Generates indexable public pages (<code>/e/[slug]</code>) with structured Event JSON-LD for SEO.</p>
+          </div>
+          <div class="card purple">
+            <span class="icon purple" aria-hidden="true">👥</span>
+            <h3>Shared Workspaces</h3>
+            <p>Shared calendar spaces where teams and organizers parse and publish schedule rosters together.</p>
+          </div>
+          <div class="card yellow">
+            <span class="icon yellow" aria-hidden="true">🛠️</span>
+            <h3>Developer API</h3>
+            <p>Public endpoint (<code>/api/v1/extract</code>) with Bearer token auth and HMAC signed webhooks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · AUDIENCE -->
+    <section class="slide" data-slide="7" aria-label="Target Audience">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>Target Audience</span>
+          <h2>Who uses <span class="accent-word">loopin</span>?</h2>
+          <p class="lede">Anyone who interacts with event information online.</p>
+        </div>
+        <div class="grid g4">
+          <div class="card person">
+            <span class="icon" aria-hidden="true">🎓</span>
+            <h3>Students</h3>
+            <p>Snap lecture timetables, deadlines, and campus flyers straight into their calendars.</p>
+          </div>
+          <div class="card person blue">
+            <span class="icon" aria-hidden="true">💼</span>
+            <h3>Busy Professionals</h3>
+            <p>Turn webinar announcements and Slack event posts into Google Calendar slots.</p>
+          </div>
+          <div class="card person green">
+            <span class="icon green" aria-hidden="true">🎪</span>
+            <h3>Event Organizers</h3>
+            <p>Make shareable event pages from promo material and track attendee engagement.</p>
+          </div>
+          <div class="card person purple">
+            <span class="icon purple" aria-hidden="true">⌨️</span>
+            <h3>Developers</h3>
+            <p>Add multimodal extraction to custom apps through the REST API and webhooks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 · PRICING -->
+    <section class="slide" data-slide="8" aria-label="Pricing">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>Monetization + Business Model</span>
+          <h2>Pricing.</h2>
+          <p class="lede">Live at <a class="accent-word" href="https://loopin.tadstech.dev/" target="_blank" rel="noopener" style="font-weight:500">loopin.tadstech.dev/pricing</a>, with USD / NGN toggling.</p>
+          <div class="pricing-selector" role="group" aria-label="Currency">
+            <button type="button" data-cur="USD" class="active" onclick="setCurrency('USD')">USD ($)</button>
+            <button type="button" data-cur="NGN" onclick="setCurrency('NGN')">NGN (₦)</button>
+          </div>
+        </div>
+        <div class="grid g3">
+          <div class="price-card">
+            <span class="price-tier">Free</span>
+            <div class="price" data-usd="$0" data-ngn="₦0">$0 <small>/ month</small></div>
+            <div class="price-sub">No card required</div>
+            <ul>
+              <li><span class="check" aria-hidden="true"></span>3 extractions / month</li>
+              <li><span class="check" aria-hidden="true"></span>Bring your own keys</li>
+              <li><span class="check" aria-hidden="true"></span>Community support</li>
+            </ul>
+            <button class="btn ghost" type="button" onclick="goToSlide(1)">Start free</button>
+          </div>
+          <div class="price-card pro">
+            <span class="popular">Most popular</span>
+            <span class="price-tier">Pro</span>
+            <div class="price" data-usd="$5" data-ngn="₦7,500">$5 <small>/ month</small></div>
+            <div class="price-sub">For individuals who live in their calendar</div>
+            <ul>
+              <li><span class="check" aria-hidden="true"></span>Unlimited extractions</li>
+              <li><span class="check" aria-hidden="true"></span>One-click Calendar sync</li>
+              <li><span class="check" aria-hidden="true"></span>Saved history</li>
+              <li><span class="check" aria-hidden="true"></span>Managed AI, no keys</li>
+            </ul>
+            <button class="btn primary" type="button" onclick="goToSlide(1)">Upgrade to Pro</button>
+          </div>
+          <div class="price-card">
+            <span class="price-tier">Team</span>
+            <div class="price" data-usd="$19" data-ngn="₦28,500">$19 <small>/ month</small></div>
+            <div class="price-sub">For crews and organizing teams</div>
+            <ul>
+              <li><span class="check" aria-hidden="true"></span>Up to 5 seats</li>
+              <li><span class="check" aria-hidden="true"></span>Shared destinations</li>
+              <li><span class="check" aria-hidden="true"></span>Centralised billing</li>
+            </ul>
+            <button class="btn ghost" type="button" onclick="goToSlide(1)">Contact sales</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 · DEMO -->
+    <section class="slide" data-slide="9" aria-label="Live Extraction Simulator">
+      <div class="slide-inner">
+        <div class="slide-head center">
+          <span class="eyebrow"><span class="pulse"></span>Interactive Preview</span>
+          <h2>Extraction Simulator.</h2>
+          <p class="lede">Click the sample flyer to simulate AI parsing and Google Calendar sync.</p>
+        </div>
+        <div class="demo-panel">
+          <div class="demo-side">
+            <label>Simulated event input</label>
+            <div class="demo-input" id="demo-input" role="button" tabindex="0" aria-label="Run extraction on the sample flyer" onclick="runDemo()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();runDemo()}">
+              <div class="fname">🖼️ TalentNation_DemoDay_Flyer.png</div>
+              <div class="ftext">“AI Rebuild Challenge Demo Day @ Pier Place, Yaba, Lagos. Oct 21, 2026 at 10:00 AM.”</div>
+              <div class="hint">↗ Click to run AI extraction</div>
+            </div>
+          </div>
+          <div class="demo-side">
+            <label>Structured extraction output</label>
+            <div class="demo-output" id="demo-output" aria-live="polite">
+              <span id="demo-output-text">Waiting for user input…</span>
+            </div>
+          </div>
+          <div class="demo-foot">
+            <div class="demo-status"><span class="live-dot" aria-hidden="true"></span><span>Google OAuth session active</span></div>
+            <button class="sync-btn" id="sync-btn" type="button" disabled onclick="doSync()">＋ Sync to Google Calendar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 · FINALE (dark) -->
+    <section class="slide dark" data-slide="10" aria-label="Judge Finale">
+      <div class="slide-inner">
+        <div class="finale">
+          <span class="eyebrow"><span class="pulse"></span>Talent Nation Demo Day Challenge</span>
+          <h2>Judges, put us to the test.</h2>
+          <p class="lede">Have an event poster on your phone? Scan the QR code or send it in — try loopin on your own device.</p>
+          <div class="qrcode">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=https://loopin.tadstech.dev/pricing" alt="Scan to try loopin" loading="lazy"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <div class="fallback">loopin.tadstech.dev</div>
+          </div>
+          <div class="finale-foot">
+            <span class="finale-pill">✓ Zero manual typing</span>
+            <span class="finale-pill">✓ Instant calendar sync</span>
+            <span class="finale-pill">✓ Built with Next.js 16 + AI</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="dock">
+    <div class="dock-inner">
+      <div class="dock-left">© 2026 <a href="https://loopin.tadstech.dev" target="_blank" rel="noopener">loopin.tadstech.dev</a></div>
+      <nav class="dot-nav" id="dot-nav" aria-label="Slide navigation"></nav>
+      <div class="dock-right">← → navigate · F fullscreen</div>
+    </div>
+  </footer>
+
+  <script>
+    const slides = [
+      {n:1,  t:"The Hook"},
+      {n:2,  t:"The Problem"},
+      {n:3,  t:"Our Solution"},
+      {n:4,  t:"How We Built It"},
+      {n:5,  t:"Reimagining Calendars"},
+      {n:6,  t:"Platform Features"},
+      {n:7,  t:"Target Audience"},
+      {n:8,  t:"Pricing"},
+      {n:9,  t:"Extraction Simulator"},
+      {n:10, t:"Judge Finale"}
+    ];
+    let idx = 0;
+    const $ = id => document.getElementById(id);
+
+    /* build dot nav */
+    const dotNav = $("dot-nav");
+    slides.forEach((s, i) => {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.setAttribute("aria-label", "Go to slide " + s.n + ": " + s.t);
+      b.addEventListener("click", () => goToSlide(i + 1));
+      dotNav.appendChild(b);
+    });
+
+    function render(){
+      document.querySelectorAll(".slide").forEach((el, i) => {
+        el.classList.toggle("active", i === idx);
+      });
+      const cur = slides[idx];
+      $("slide-num").textContent = String(cur.n).padStart(2, "0");
+      $("slide-title").textContent = cur.t;
+      $("progress").style.width = ((idx + 1) / slides.length * 100) + "%";
+      dotNav.querySelectorAll("button").forEach((b, i) => {
+        b.classList.toggle("active", i === idx);
+        if(i === idx) b.setAttribute("aria-current", "true");
+        else b.removeAttribute("aria-current");
+      });
+      $("prev-btn").disabled = idx === 0;
+      $("next-btn").disabled = idx === slides.length - 1;
+      if(cur.n !== 9) resetDemo();
+    }
+
+    function goToSlide(n){
+      if(n < 1 || n > slides.length) return;
+      idx = n - 1;
+      render();
+    }
+    function next(){ if(idx < slides.length - 1) goToSlide(idx + 2); }
+    function prev(){ if(idx > 0) goToSlide(idx); }
+
+    /* keyboard: arrows always navigate; space only when not on a control */
+    document.addEventListener("keydown", (e) => {
+      const t = e.target;
+      const onControl = t && (
+        t.tagName === "BUTTON" || t.tagName === "A" ||
+        (t.getAttribute && t.getAttribute("role") === "button")
+      );
+      if(e.key === "ArrowRight" || e.key === "PageDown"){ e.preventDefault(); next(); }
+      else if(e.key === "ArrowLeft" || e.key === "PageUp"){ e.preventDefault(); prev(); }
+      else if(e.key === "Home"){ e.preventDefault(); goToSlide(1); }
+      else if(e.key === "End"){ e.preventDefault(); goToSlide(slides.length); }
+      else if((e.key === " " || e.key === "Enter") && !onControl){ e.preventDefault(); next(); }
+      else if(e.key === "f" || e.key === "F"){ if(!onControl) toggleFs(); }
+    });
+
+    $("prev-btn").addEventListener("click", prev);
+    $("next-btn").addEventListener("click", next);
+
+    function toggleFs(){
+      if(!document.fullscreenElement){
+        document.documentElement.requestFullscreen().catch(()=>{});
+      } else {
+        document.exitFullscreen().catch(()=>{});
+      }
+    }
+    $("fs-btn").addEventListener("click", toggleFs);
+
+    /* currency toggle — real values */
+    function setCurrency(cur){
+      document.querySelectorAll(".pricing-selector button").forEach(b =>
+        b.classList.toggle("active", b.dataset.cur === cur)
+      );
+      document.querySelectorAll(".price[data-usd]").forEach(el => {
+        const unit = el.querySelector("small");
+        const amount = cur === "USD" ? el.dataset.usd : el.dataset.ngn;
+        el.innerHTML = amount + (unit ? " <small>/ month</small>" : "");
+      });
+    }
+
+    /* extraction demo */
+    const RESULT_HTML =
+      '<div class="entry">' +
+        '<div class="head"><span>✓ Extraction Success</span><span>0.42s</span></div>' +
+        '<div class="erow"><span class="ekey">Title</span><span>Talent Nation AI Rebuild Demo Day</span></div>' +
+        '<div class="erow"><span class="ekey">Date</span><span>Oct 21, 2026</span></div>' +
+        '<div class="erow"><span class="ekey">Time</span><span>10:00 AM – 1:00 PM WAT</span></div>' +
+        '<div class="erow"><span class="ekey">Venue</span><span>Pier Place, 14 Montgomery Rd, Yaba, Lagos</span></div>' +
+      '</div>';
+
+    let demoDone = false;
+    let demoTimer = null;
+
+    function setSync(state){
+      const btn = $("sync-btn");
+      if(!btn) return;
+      btn.className = "sync-btn" + (state ? " " + state : "");
+      btn.disabled = state !== "ready";
+      btn.innerHTML = state === "done"
+        ? "✓ Synced to Google Calendar"
+        : (state === "ready" ? "＋ Sync to Google Calendar" : "＋ Sync to Google Calendar");
+    }
+
+    function runDemo(){
+      const out = $("demo-output");
+      if(!out) return;
+      if(demoDone){
+        out.innerHTML = RESULT_HTML;
+        setSync("ready");
+        return;
+      }
+      out.innerHTML = '<div class="spinner" aria-hidden="true"></div><div style="text-align:center">Running Groq Llama-3 Vision AI extraction…</div>';
+      setSync("");
+      clearTimeout(demoTimer);
+      demoTimer = setTimeout(() => {
+        out.innerHTML = RESULT_HTML;
+        setSync("ready");
+        demoDone = true;
+      }, 1100);
+    }
+
+    function doSync(){
+      const btn = $("sync-btn");
+      if(!btn || btn.disabled) return;
+      setSync("done");
+    }
+
+    function resetDemo(){
+      clearTimeout(demoTimer);
+      demoDone = false;
+      const out = $("demo-output");
+      if(out) out.innerHTML = '<span id="demo-output-text">Waiting for user input…</span>';
+      setSync("");
+    }
+
+    render();
+  </script>
+</body>
+</html>

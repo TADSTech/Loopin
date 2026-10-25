@@ -3,7 +3,7 @@
 import { randomBytes } from "node:crypto";
 
 import { generateApiKey } from "@/lib/api-keys";
-import { generateWebhookSecret, WEBHOOK_EVENTS } from "@/lib/webhooks";
+import { generateWebhookSecret, isSsrfSafeTarget, WEBHOOK_EVENTS } from "@/lib/webhooks";
 import { createClient } from "@/lib/supabase/server";
 
 export type ApiKeyRow = {
@@ -108,6 +108,9 @@ export async function createWebhook(
   if (!user) return { error: "auth_required" };
 
   if (!/^https?:\/\//i.test(url)) return { error: "invalid_url" };
+  // Block loopback / RFC1918 / cloud-metadata targets at registration time so a
+  // webhook can never be aimed at internal infrastructure later.
+  if (!isSsrfSafeTarget(url.trim())) return { error: "invalid_url" };
   const valid = events.filter((event) =>
     (WEBHOOK_EVENTS as readonly string[]).includes(event),
   );

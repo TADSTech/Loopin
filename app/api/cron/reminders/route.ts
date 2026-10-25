@@ -10,12 +10,19 @@ import { createAdminClient } from "@/lib/supabase/admin";
  */
 export async function GET(request: Request) {
   const secret = process.env.CRON_SECRET;
+  // Fail closed: if the secret is not configured, never run the job. Accepting
+  // the secret via a query parameter is also removed — bearer tokens must only
+  // travel in the Authorization header (query strings are logged everywhere).
+  if (!secret) {
+    return NextResponse.json({ error: "not_configured" }, { status: 503 });
+  }
+
   const header = request.headers.get("authorization") ?? "";
   const provided = header.toLowerCase().startsWith("bearer ")
     ? header.slice(7).trim()
-    : (new URL(request.url).searchParams.get("secret") ?? "");
+    : "";
 
-  if (secret && !safeEqual(provided, secret)) {
+  if (!safeEqual(provided, secret)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 

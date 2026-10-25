@@ -1,5 +1,7 @@
 "use server";
 
+import { headers } from "next/headers";
+
 import {
   extractEventsFromInput,
   friendlyExtractionMessage,
@@ -12,11 +14,13 @@ import {
   getGoogleCalendarCredential,
   isCalendarConnected,
 } from "@/lib/google-calendar";
+import { clientIp } from "@/lib/ip";
 import {
   FREE_MONTHLY_EXTRACTION_LIMIT,
   monthStartIso,
   type PlanId,
 } from "@/lib/quota";
+import { checkRequest } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient } from "@/lib/supabase/server";
 import { checkTrialEligibility, type TrialEligibility } from "@/lib/trials";
@@ -32,6 +36,7 @@ const initialResult: AppState = {
   calendarConnected: false,
   remainingExtractions: null,
   limitReached: false,
+  abuse: null,
 };
 
 const asString = (value: FormDataEntryValue | null) =>
@@ -153,8 +158,37 @@ export async function ingestEvents(
   const groqApiKey = asString(formData.get("groqApiKey")).trim();
   const files = formData
     .getAll("images")
-    .filter((value): value is File => value instanceof File && value.size > 0)
+    .filter(
+      (value): value is File =>
+        value instanceof File &&
+        value.size > 0 &&
+        value.size <= 10 * 1024 * 1024,
+    )
     .slice(0, 3);
+
+  // Per-IP abuse guard. Repeatedly exceeding the per-minute extraction rate
+  // accrues strikes and escalates to an IP ban enforced across the whole app
+  // by middleware (lib/rate-limit.ts).
+  const ip = clientIp({ headers: await headers() });
+  const guard = checkRequest(
+    `ingest:${ip}`,
+    { limit: 30, windowMs: 60_000 },
+    `ip:${ip}`,
+  );
+  if (!guard.allowed) {
+    return {
+      ...initialResult,
+      timezone,
+      status: "error",
+      abuse: {
+        kind: guard.banned ? "banned" : "rate_limited",
+        retryAfter: guard.retryAfter,
+      },
+      message: guard.banned
+        ? "Too many requests. Access from this network is temporarily paused. Please try again later."
+        : `You're going a little too fast. Please wait ${guard.retryAfter}s and try again.`,
+    };
+  }
 
   // Resolve the signed-in user, if any.
   let userId: string | null = null;

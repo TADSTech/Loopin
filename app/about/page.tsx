@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 import { SITE } from "@/lib/site";
+import { safeJsonLdStringify } from "@/lib/json-ld";
 
 export const metadata: Metadata = {
   title: "About & FAQ",
@@ -186,7 +187,7 @@ export default function AboutPage() {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSONLD) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(FAQ_JSONLD) }}
       />
     </main>
   );

@@ -1,4 +1,5 @@
 import { SITE } from "@/lib/site";
+import { safeJsonLdStringify } from "@/lib/json-ld";
 
 /**
  * Site-wide JSON-LD (Organization, WebSite, SoftwareApplication).
@@ -74,8 +75,8 @@ export default function StructuredData() {
   return (
     <script
       type="application/ld+json"
-      // Static, developer-authored JSON — safe to inject.
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      // Static, developer-authored JSON. Escaped as defence-in-depth.
+      dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(graph) }}
     />
   );
 }

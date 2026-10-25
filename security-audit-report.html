@@ -1,0 +1,395 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Loopin v3 — Security Audit &amp; Hardening Report</title>
+    <style>
+      :root {
+        --bg: #f6f7f9;
+        --card: #ffffff;
+        --ink: #1a1d21;
+        --muted: #5b6471;
+        --line: #e3e7ec;
+        --crit: #b42318;
+        --crit-bg: #fef3f2;
+        --high: #b54708;
+        --high-bg: #fffaeb;
+        --med: #175cd3;
+        --med-bg: #eff8ff;
+        --low: #067647;
+        --low-bg: #ecfdf3;
+        --ok: #067647;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+        line-height: 1.55;
+      }
+      .wrap { max-width: 1040px; margin: 0 auto; padding: 40px 24px 80px; }
+      h1 { font-size: 30px; margin: 0 0 4px; letter-spacing: -0.02em; }
+      .sub { color: var(--muted); margin: 0 0 28px; }
+      .meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 30px; }
+      .pill {
+        font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 999px;
+        background: #eef1f4; color: var(--muted); border: 1px solid var(--line);
+      }
+      .card {
+        background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+        padding: 24px 26px; margin-bottom: 22px; box-shadow: 0 1px 2px rgba(16,24,40,.04);
+      }
+      h2 { font-size: 19px; margin: 0 0 14px; padding-bottom: 10px; border-bottom: 1px solid var(--line); }
+      h3 { font-size: 15px; margin: 20px 0 8px; }
+      p { margin: 8px 0; }
+      code, .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 13px; }
+      code { background: #f1f3f5; padding: 1px 6px; border-radius: 5px; }
+      .findings { display: flex; flex-direction: column; gap: 14px; }
+      .finding { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+      .fhead { display: flex; align-items: center; gap: 12px; padding: 13px 16px; }
+      .sev { font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; padding: 3px 9px; border-radius: 6px; white-space: nowrap; }
+      .sev.critical { background: var(--crit-bg); color: var(--crit); }
+      .sev.high { background: var(--crit-bg); color: var(--crit); }
+      .sev.medium { background: var(--med-bg); color: var(--med); }
+      .sev.low { background: var(--low-bg); color: var(--low); }
+      .ftitle { font-weight: 700; font-size: 15px; }
+      .fbody { padding: 4px 16px 16px; color: var(--ink); }
+      .fbody .loc { color: var(--muted); font-size: 13px; margin-bottom: 8px; }
+      .status { display: inline-block; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 6px; }
+      .status.fixed { background: var(--low-bg); color: var(--ok); }
+      .status.hardened { background: var(--med-bg); color: var(--med); }
+      .status.observed { background: #fff7ed; color: #c4320a; }
+      table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+      th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+      th { color: var(--muted); font-weight: 600; background: #fafbfc; }
+      ul { margin: 8px 0 8px 2px; padding-left: 20px; }
+      li { margin: 4px 0; }
+      .check { list-style: none; padding-left: 0; }
+      .check li::before { content: "☐ "; color: var(--med); font-weight: 700; }
+      .kbd { background:#111; color:#fff; border-radius:5px; padding:1px 6px; font-size:12px; }
+      .note { background: var(--high-bg); border:1px solid #fde68a; padding:12px 14px; border-radius:10px; font-size:13.5px; }
+      .okbox { background: var(--low-bg); border:1px solid #abefc6; padding:12px 14px; border-radius:10px; font-size:13.5px; }
+      a { color: var(--med); }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Loopin v3 — Security Audit &amp; Hardening</h1>
+      <p class="sub">Pre-launch review of the SaaS codebase (Next.js 16 · Supabase · Bachs payments · Google Calendar)</p>
+      <div class="meta">
+        <span class="pill">Date: 2026-10-16</span>
+        <span class="pill">Scope: auth · RLS · API · payments · config · deps</span>
+        <span class="pill">Posture: remediated + residual items listed</span>
+        <span class="pill">Build ✓ · TypeScript ✓ · ESLint ✓ · 80 tests ✓</span>
+      </div>
+
+      <div class="card">
+        <h2>Executive summary</h2>
+        <p>
+          A focused white-box review of the Loopin v3 codebase surfaced
+          <strong>6 security issues</strong> (2 high/medium, 4 medium/low) plus a set of
+          hardening gaps appropriate for a SaaS about to go live. The most serious was a
+          <strong>stored cross-site scripting (XSS)</strong> sink on the public event pages and an
+          <strong>open redirect</strong> in the OAuth callback. Both are now fixed. The
+          authentication model (Supabase RLS) is, on the whole, well constructed: the
+          entitlement and secret tables are correctly locked down so that only the
+          server (service-role) key can write them, and users cannot forge plan upgrades.
+        </p>
+        <p>
+          All fixes have been applied, type-checked, linted, and the production build
+          passes. The remaining items in the <a href="#golive">Go-live checklist</a> are
+          operational (secrets hygiene, CSP tightening) rather than code defects.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>Findings</h2>
+        <div class="findings">
+          <div class="finding">
+            <div class="fhead">
+              <span class="sev high">High</span>
+              <span class="ftitle">Stored XSS via JSON-LD <code>dangerouslySetInnerHTML</code></span>
+              <span class="status fixed">Fixed</span>
+            </div>
+            <div class="fbody">
+              <div class="loc">app/e/[slug]/page.tsx · app/about/page.tsx · app/components/structured-data.tsx</div>
+              <p>
+                Three pages inject <code>JSON.stringify(...)</code> directly into a
+                <code>&lt;script type="application/ld+json"&gt;</code> via
+                <code>dangerouslySetInnerHTML</code>. <code>JSON.stringify</code> does
+                <strong>not</strong> escape <code>&lt;/script&gt;</code>, so a published
+                event whose <code>title</code>, <code>notes</code>, or <code>location</code>
+                contains <code>&lt;/script&gt;&lt;script&gt;alert(1)&lt;/script&gt;</code>
+                breaks out of the script tag and executes in every visitor's browser. The
+                public event page is indexable, so this is a stored, worm-able XSS.
+              </p>
+              <p>
+                <strong>Fix:</strong> added <code>lib/json-ld.ts · safeJsonLdStringify()</code>
+                which escapes <code>&lt;</code>, <code>&gt;</code>, <code>&amp;</code>,
+                U+2028 and U+2029 to their Unicode escapes, and routed all three sinks through it.
+              </p>
+            </div>
+          </div>
+
+          <div class="finding">
+            <div class="fhead">
+              <span class="sev high">High</span>
+              <span class="ftitle">Open redirect in OAuth callback (<code>next</code> param)</span>
+              <span class="status fixed">Fixed</span>
+            </div>
+            <div class="fbody">
+              <div class="loc">app/auth/callback/route.ts</div>
+              <p>
+                The post-login redirect target was taken straight from
+                <code>?next=</code> and concatenated onto the origin:
+                <code>NextResponse.redirect(\`${origin}${next}\`)</code>. An attacker who
+                controls the callback URL can set
+                <code>?next=//evil.example</code> (protocol-relative) or an absolute URL to
+                bounce a freshly-authenticated user to a phishing site that impersonates
+                Loopin — a classic credential-harvesting vector.
+              </p>
+              <p>
+                <strong>Fix:</strong> added <code>isValidLocalRedirect()</code> — only paths
+                beginning with a single <code>/</code> (not <code>//</code> or <code>/\</code>)
+                that resolve to the same origin are accepted; everything else falls back to <code>/</code>.
+              </p>
+            </div>
+          </div>
+
+          <div class="finding">
+            <div class="fhead">
+              <span class="sev medium">Medium</span>
+              <span class="ftitle">Missing HTTP security headers (CSP / HSTS / X-Frame-Options)</span>
+              <span class="status fixed">Fixed</span>
+            </div>
+            <div class="fbody">
+              <div class="loc">next.config.ts</div>
+              <p>
+                The app sent no <code>Content-Security-Policy</code>, <code>X-Frame-Options</code>,
+                <code>X-Content-Type-Options</code>, <code>Referrer-Policy</code>,
+                <code>Permissions-Policy</code>, or <code>Strict-Transport-Security</code>. This
+                leaves users exposed to clickjacking, MIME sniffing and weakens XSS containment.
+              </p>
+              <p>
+                <strong>Fix:</strong> added an async <code>headers()</code> block applying a
+                restrictive baseline CSP (<code>default-src 'self'</code>,
+                <code>frame-ancestors 'none'</code>, <code>base-uri 'self'</code>,
+                <code>object-src 'none'</code>, <code>connect-src</code> limited to
+                <code>*.supabase.co</code>), HSTS (preload), and the remaining headers above.
+              </p>
+              <p class="note">
+                The CSP keeps <code>'unsafe-inline'</code> for scripts because the Next.js App
+                Router emits inline RSC bootstrap scripts. For a fully strict policy, move to a
+                per-request nonce via middleware — tracked as a follow-up.
+              </p>
+            </div>
+          </div>
+
+          <div class="finding">
+            <div class="fhead">
+              <span class="sev medium">Medium</span>
+              <span class="ftitle">No rate limiting on paid AI endpoints (cost / DoS abuse)</span>
+              <span class="status fixed">Fixed</span>
+            </div>
+            <div class="fbody">
+              <div class="loc">app/api/v1/extract/route.ts · app/api/checkout/route.ts · lib/rate-limit.ts</div>
+              <p>
+                The public extraction API and the checkout endpoint had no throttling. Each
+                successful extraction call spends real money on Groq/OpenRouter tokens, so an
+                attacker with a valid key (or a leaked key) could drain the AI budget, and the
+                checkout endpoint could be used to spam Bachs session creation.
+              </p>
+              <p>
+                <strong>Fix:</strong> added <code>lib/rate-limit.ts</code> (fixed-window limiter)
+                and wired it in: extraction is capped at <strong>30 req/min per key+IP</strong>,
+                checkout at <strong>10 req/min per user</strong>, returning <code>429</code> with a
+                <code>Retry-After</code> header.
+              </p>
+              <p class="note">
+                In-memory limiting is per serverless instance. Before heavy production traffic,
+                back it with a shared store (Upstash Redis / Vercel KV) using the same keys.
+              </p>
+            </div>
+          </div>
+
+          <div class="finding">
+            <div class="fhead">
+              <span class="sev medium">Medium</span>
+              <span class="ftitle">Cron secret accepted in URL query + fail-open behaviour</span>
+              <span class="status fixed">Fixed</span>
+            </div>
+            <div class="fbody">
+              <div class="loc">app/api/cron/reminders/route.ts</div>
+              <p>
+                The scheduled reminder processor accepted the <code>CRON_SECRET</code> via a
+                <code>?secret=</code> query parameter (logged in every proxy/access log) and,
+                more dangerously, <strong>skipped the check entirely</strong> when the secret was
+                unset — letting anyone trigger reminder processing if the env var was missing.
+              </p>
+              <p>
+                <strong>Fix:</strong> removed the query-string path, now requires
+                <code>Authorization: Bearer</code> only, and <strong>fails closed</strong>
+                (HTTP 503) when <code>CRON_SECRET</code> is not configured.
+              </p>
+            </div>
+          </div>
+
+          <div class="finding">
+            <div class="fhead">
+              <span class="sev low">Low</span>
+              <span class="ftitle">Webhook delivery — SSRF surface &amp; unbounded timeout</span>
+              <span class="status fixed">Fixed</span>
+            </div>
+            <div class="fbody">
+              <div class="loc">lib/webhooks.ts · app/platform-actions.ts</div>
+              <p>
+                User-registered webhooks were delivered with no timeout and no host validation.
+                A logged-in user could target internal services or the cloud metadata endpoint
+                (<code>169.254.169.254</code>) — a blind SSRF — and a slow endpoint could stall
+                the caller request.
+              </p>
+              <p>
+                <strong>Fix:</strong> added <code>isSsrfSafeTarget()</code> (rejects
+                loopback, RFC1918, link-local/metadata and IPv6 unique-local ranges) enforced at
+                <em>both</em> registration and delivery, plus a <strong>5s</strong> per-delivery
+                <code>AbortController</code> timeout.
+              </p>
+            </div>
+          </div>
+
+          <div class="finding">
+            <div class="fhead">
+              <span class="sev low">Low</span>
+              <span class="ftitle">Unbounded upload size in extraction</span>
+              <span class="status fixed">Fixed</span>
+            </div>
+            <div class="fbody">
+              <div class="loc">app/actions.ts (ingestEvents)</div>
+              <p>
+                Image uploads were only checked for <code>size &gt; 0</code> (capped overall by
+                the 10 MB server-action limit). Added a per-file <code>≤ 10 MB</code> cap.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Phase 2 — Rate-limit UX, IP banning &amp; 404</h2>
+        <p>
+          Building on the throttling above, the abuse path now has a full
+          lifecycle: warn, then escalate, then enforce.
+        </p>
+        <h3>Escalating rate limiter → IP ban</h3>
+        <p>
+          <code>lib/rate-limit.ts</code> now records a <strong>strike</strong> on
+          every blocked request, keyed on the client IP. Reaching the threshold
+          inside the window escalates to an <strong>IP ban</strong>. Thresholds are
+          env-tunable: <code>RATE_STRIKE_THRESHOLD</code> (default 8),
+          <code>RATE_STRIKE_WINDOW_MS</code> (10 min),
+          <code>RATE_BAN_DURATION_MS</code> (15 min).
+        </p>
+        <p>
+          Bans are enforced <strong>app-wide</strong> by the middleware
+          (<code>proxy.ts</code>): a banned IP gets a <code>403</code>
+          "Access temporarily blocked" page on <em>every</em> request, so a caller
+          can't bypass a limit by reloading pages or switching endpoints. The
+          strike is keyed on the client IP from <code>lib/ip.ts</code>
+          (<code>x-forwarded-for</code> first hop → <code>x-real-ip</code>).
+        </p>
+        <h3>In-app warning modal</h3>
+        <p>
+          When the on-page extractor is rate-limited or banned, the server action
+          returns an <code>abuse</code> flag (<code>lib/event-types.ts</code>) and the
+          home page raises the new <code>app/components/warning-modal.tsx</code> — a
+          friendly "slow down"/"access paused" dialog with a retry countdown and a
+          support link. It's dismiss-aware: it re-appears only for a fresh block.
+        </p>
+        <h3>Custom 404 page</h3>
+        <p>
+          <code>app/not-found.tsx</code> provides a branded 404 (also used for
+          missing public event pages) that returns users to the app instead of the
+          default Next.js error screen.
+        </p>
+        <p class="note">
+          The limiter is still in-memory (per serverless instance) and keys bans on
+          IP. Before heavy production traffic, back it with a shared store (Upstash
+          Redis / Vercel KV) so bans and counters hold across instances. Tighten
+          <code>RATE_STRIKE_THRESHOLD</code> for a stricter policy.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2>What's already done well (verified)</h2>
+        <div class="okbox">
+          <ul>
+            <li><strong>RLS lockdown of secrets &amp; entitlements.</strong> <code>calendar_tokens</code> has RLS enabled with <em>no</em> policies (only the service-role key can touch it), and <code>subscriptions</code> has only a SELECT policy — plan upgrades can <em>only</em> be written by the payment webhook via the admin client. A normal user cannot forge Pro.</li>
+            <li><strong>Server-side trial eligibility.</strong> <code>never-subscribed</code> + <code>unused-device</code> is re-checked at checkout; a missing trial product returns <code>503</code> rather than silently charging.</li>
+            <li><strong>Webhook signature verification.</strong> Bachs signatures use HMAC-SHA256 with a constant-time compare and a 5-minute replay window; raw body is verified before parsing.</li>
+            <li><strong>API keys hashed at rest.</strong> Only a SHA-256 hash + short prefix are stored; the plaintext is shown once.</li>
+            <li><strong>No committed secrets.</strong> <code>.env*</code> is gitignored and no live keys were found in the tree.</li>
+            <li><strong>Workspace membership enforced by RLS</strong> via SECURITY DEFINER helpers (the earlier 42P17 recursion is fixed).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card" id="golive">
+        <h2>Go-live checklist (residual / operational)</h2>
+        <ul class="check">
+          <li>Rotate and confirm all production secrets on Vercel are <strong>byte-identical</strong> to Bachs' webhook signing secret (per AGENTS.md §6); verify the webhook lands with <code>event source → Account events</code>.</li>
+          <li>Revoke the temporary Supabase PAT mentioned in SETUP.md Step 1 (<code>sbp_fca34…</code>).</li>
+          <li>Confirm <code>.env</code> is never committed (it is gitignored) and that Vercel env uses encrypted storage.</li>
+          <li>Enable Supabase "Prevent use of leaked passwords" (HaveIBeenPwned) — optional but recommended (SETUP.md §Optional).</li>
+          <li>Back the rate limiter with a shared store (Upstash/Redis) before scaling traffic.</li>
+          <li>Replace the CSP <code>'unsafe-inline'</code> script allowance with a per-request nonce (middleware) for a strict policy.</li>
+          <li>Add full SSRF protection that resolves DNS and inspects the resolved IP (the current guard is hostname-based).</li>
+          <li>Run <code>npm audit</code> / Dependabot on the dependency tree and keep Next.js + Supabase SDKs patched.</li>
+          <li>Add monitoring/alerting on the Bachs webhook <code>[bachs-webhook]</code> logs and on <code>429</code>/<code>401</code> spikes.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2>Files changed</h2>
+        <table>
+          <thead>
+            <tr><th>File</th><th>Change</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>lib/json-ld.ts</code></td><td>New — safe JSON-LD serializer (XSS fix).</td></tr>
+            <tr><td><code>app/e/[slug]/page.tsx</code></td><td>Use safe serializer for event JSON-LD.</td></tr>
+            <tr><td><code>app/about/page.tsx</code></td><td>Use safe serializer for FAQ JSON-LD.</td></tr>
+            <tr><td><code>app/components/structured-data.tsx</code></td><td>Use safe serializer for site JSON-LD.</td></tr>
+            <tr><td><code>app/auth/callback/route.ts</code></td><td>Validate <code>next</code> (open-redirect fix).</td></tr>
+            <tr><td><code>next.config.ts</code></td><td>Add security headers (CSP/HSTS/etc.).</td></tr>
+            <tr><td><code>lib/rate-limit.ts</code></td><td>New — fixed-window limiter <em>+ strike→IP-ban escalation</em> (<code>checkRequest</code>/<code>getBanStatus</code>/<code>clearBan</code>, env-tunable).</td></tr>
+            <tr><td><code>lib/ip.ts</code></td><td>New — client IP resolution for rate/bans keys.</td></tr>
+            <tr><td><code>app/api/v1/extract/route.ts</code></td><td>Rate limit + IP-ban strike (30/min/key+IP).</td></tr>
+            <tr><td><code>app/api/checkout/route.ts</code></td><td>Rate limit + IP-ban strike (10/min/user).</td></tr>
+            <tr><td><code>app/actions.ts</code></td><td>Per-IP extract guard (surfaces <code>abuse</code>) + ≤10 MB upload cap.</td></tr>
+            <tr><td><code>proxy.ts</code></td><td>Middleware enforces IP bans app-wide (403 page) before session refresh.</td></tr>
+            <tr><td><code>app/components/warning-modal.tsx</code></td><td>New — rate-limit / ban warning dialog.</td></tr>
+            <tr><td><code>app/page.tsx</code></td><td>Raise/dismiss the warning modal from the extraction result.</td></tr>
+            <tr><td><code>app/not-found.tsx</code></td><td>New — branded 404 page.</td></tr>
+            <tr><td><code>lib/event-types.ts</code></td><td><code>AppState.abuse</code> flag for the warning modal.</td></tr>
+            <tr><td><code>tests/rate-limit.test.ts</code></td><td>New — covers limiter + strike→ban escalation.</td></tr>
+            <tr><td><code>app/api/cron/reminders/route.ts</code></td><td>Bearer-only secret, fail closed.</td></tr>
+            <tr><td><code>lib/webhooks.ts</code></td><td>SSRF guard + 5s timeout on delivery.</td></tr>
+            <tr><td><code>app/platform-actions.ts</code></td><td>SSRF-check webhook URL at registration.</td></tr>
+            <tr><td><code>app/actions.ts</code></td><td>Cap upload size (≤10 MB/file).</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card">
+        <h2>Severity legend</h2>
+        <p>
+          <span class="sev high">High</span> easy to exploit, direct account/user impact ·
+          <span class="sev medium">Medium</span> needs a condition or is partial ·
+          <span class="sev low">Low</span> limited impact / defence-in-depth.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

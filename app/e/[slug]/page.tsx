@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { formatEventWhen } from "@/lib/format";
+import { safeJsonLdStringify } from "@/lib/json-ld";
 import { SITE } from "@/lib/site";
 import { createAdminClient } from "@/lib/supabase/admin";
 
@@ -181,7 +182,7 @@ export default async function PublicEventPage({
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        dangerouslySetInnerHTML={{ __html: safeJsonLdStringify(jsonLd) }}
       />
     </main>
   );

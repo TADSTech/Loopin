@@ -5,7 +5,9 @@ import {
   productIdForPlan,
   trialProductIdForPlan,
 } from "@/lib/bachs";
+import { clientIp } from "@/lib/ip";
 import type { Currency, PlanId } from "@/lib/payments";
+import { checkRequest } from "@/lib/rate-limit";
 import { createClient } from "@/lib/supabase/server";
 import { checkTrialEligibility } from "@/lib/trials";
 
@@ -49,6 +51,24 @@ export async function POST(request: Request) {
 
   if (!user) {
     return NextResponse.json({ error: "auth_required" }, { status: 401 });
+  }
+
+  // Throttle checkout creation to blunt abuse of the Bachs session creation
+  // endpoint (each call provisions a hosted checkout). Strikes are keyed on the
+  // client IP so a caller spamming checkout after being throttled gets banned.
+  const guard = checkRequest(
+    `checkout:${user.id}`,
+    { limit: 10, windowMs: 60_000 },
+    `ip:${clientIp(request)}`,
+  );
+  if (!guard.allowed) {
+    return NextResponse.json(
+      { error: guard.banned ? "banned" : "rate_limited", retry_after: guard.retryAfter },
+      {
+        status: guard.banned ? 403 : 429,
+        headers: { "Retry-After": String(guard.retryAfter) },
+      },
+    );
   }
 
   if (plan === "free") {

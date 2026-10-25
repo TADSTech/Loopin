@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import "./globals.css";
 import { SITE } from "@/lib/site";
 import StructuredData from "./components/structured-data";
+import CookieConsent from "./components/cookie-consent";
 
 const roboto = Roboto({
   variable: "--font-roboto",
@@ -85,6 +86,7 @@ export default function RootLayout({
         >
           Skip to main content
         </a>
+        <CookieConsent />
         {children}
       </body>
     </html>

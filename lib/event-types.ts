@@ -64,4 +64,11 @@ export type AppState = {
   remainingExtractions: number | null;
   /** Whether the free monthly quota is exhausted. */
   limitReached: boolean;
+  /**
+   * Set when this request was blocked by the rate limiter or an IP ban.
+   * Drives the client-side warning modal. Absent/null for normal states.
+   * (Bans are enforced by middleware; this still surfaces a graceful message
+   * when an action runs before the middleware block, e.g. local dev.)
+   */
+  abuse?: { kind: "rate_limited" | "banned"; retryAfter: number } | null;
 };

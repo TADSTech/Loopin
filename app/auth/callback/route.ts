@@ -4,6 +4,30 @@ import { createClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
 /**
+ * Returns true only when `next` is a same-origin relative path. This blocks
+ * absolute URLs (`https://evil.com`) and protocol-relative URLs (`//evil.com`)
+ * that would otherwise let an attacker redirect the user after login.
+ */
+function isValidLocalRedirect(request: Request, next: string | null): boolean {
+  if (!next || next.length === 0) return false;
+  // Must be a path-only target (leading slash, but not `//` or `/\`).
+  if (!next.startsWith("/") || next.startsWith("//") || next.startsWith("/\\")) {
+    return false;
+  }
+  // Parsing against the request origin must not change the host/port/protocol.
+  try {
+    const base = new URL(request.url);
+    const target = new URL(next, base);
+    return (
+      target.origin === base.origin &&
+      !target.searchParams.has("__proto__")
+    );
+  } catch {
+    return false;
+  }
+}
+
+/**
  * OAuth callback. Exchanges the PKCE code for a session and, when the user
  * signed in with Google (one-click setup), stores the provider access/refresh
  * tokens so extraction can auto-sync to Google Calendar without manual input.
@@ -11,11 +35,18 @@ import { createAdminClient } from "@/lib/supabase/admin";
 export async function GET(request: NextRequest) {
   const { searchParams, origin } = new URL(request.url);
   const code = searchParams.get("code");
-  const next = searchParams.get("next") ?? "/";
 
   if (!code) {
     return NextResponse.redirect(`${origin}/?auth_error=missing_code`);
   }
+
+  // Validate the post-login redirect target. Only same-origin relative paths
+  // are allowed — reject absolute URLs and protocol-relative (`//evil.com`)
+  // targets to prevent an open-redirect / phishing sink.
+  const requestedNext = searchParams.get("next");
+  const next = isValidLocalRedirect(request, requestedNext)
+    ? requestedNext!
+    : "/";
 
   const supabase = await createClient();
   const { data, error } = await supabase.auth.exchangeCodeForSession(code);

@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 
 import { hashApiKey } from "@/lib/api-keys";
 import { extractEventsFromInput, isEventPast } from "@/lib/event-intake";
+import { clientIp } from "@/lib/ip";
+import { checkRequest } from "@/lib/rate-limit";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { deliverWebhooks } from "@/lib/webhooks";
 
@@ -35,6 +37,29 @@ export async function POST(request: Request) {
 
   if (!keyRow) {
     return NextResponse.json({ error: "invalid_api_key" }, { status: 401 });
+  }
+
+  // Per-key + per-IP abuse guard. Each call spends paid AI tokens, so cap the
+  // rate even for valid keys. Repeated over-limit attempts escalate to an IP
+  // ban (strikes are keyed on the client IP). Per-instance; see lib/rate-limit.ts.
+  const ip = clientIp(request);
+  const limiterKey = `extract:${keyRow.user_id}:${ip}`;
+  const guard = checkRequest(
+    limiterKey,
+    { limit: 30, windowMs: 60_000 },
+    `ip:${ip}`,
+  );
+  if (!guard.allowed) {
+    if (guard.banned) {
+      return NextResponse.json(
+        { error: "banned", retry_after: guard.retryAfter },
+        { status: 403, headers: { "Retry-After": String(guard.retryAfter) } },
+      );
+    }
+    return NextResponse.json(
+      { error: "rate_limited", retry_after: guard.retryAfter },
+      { status: 429, headers: { "Retry-After": String(guard.retryAfter) } },
+    );
   }
 
   await admin

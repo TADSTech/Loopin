@@ -10,6 +10,7 @@ import type { AppState } from "@/lib/event-types";
 import { formatEventWhen } from "@/lib/format";
 import AuthModal from "./components/auth-modal";
 import InfoModal from "./components/info-modal";
+import WarningModal from "./components/warning-modal";
 import { SITE } from "@/lib/site";
 import { createClient } from "@/lib/supabase/client";
 
@@ -40,6 +41,9 @@ export default function Home() {
   const [files, setFiles] = useState<File[]>([]);
   const [showInfoModal, setShowInfoModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
+  // The last rate-limit / ban result the user dismissed, so the modal only
+  // re-opens for a *new* one (derived during render — no effect needed).
+  const [dismissedWarning, setDismissedWarning] = useState<unknown>(null);
   const [authMode, setAuthMode] = useState<"signin" | "signup">("signup");
   const [session, setSession] = useState<Session | null>(null);
   const [hasInputText, setHasInputText] = useState(false);
@@ -123,6 +127,7 @@ export default function Home() {
       if (event.key === "Escape") {
         setShowInfoModal(false);
         setShowAuthModal(false);
+        setDismissedWarning(state.abuse);
         setMenuOpen(false);
         setAccountMenuOpen(false);
       }
@@ -131,7 +136,13 @@ export default function Home() {
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Surface rate-limit / IP-ban outcomes from the extraction action as a modal.
+  // Derived during render: it appears for each fresh result and stays closed
+  // once the user dismisses that particular one.
+  const warning = state.abuse && state.abuse !== dismissedWarning ? state.abuse : null;
 
   // Close the account menu when clicking anywhere outside it.
   useEffect(() => {
@@ -1137,6 +1148,15 @@ export default function Home() {
         <InfoModal
           onClose={() => setShowInfoModal(false)}
           onGetStarted={() => openAuth("signup")}
+        />
+      )}
+
+      {/* Rate-limit / ban warning modal */}
+      {warning && (
+        <WarningModal
+          kind={warning.kind}
+          retryAfter={warning.retryAfter}
+          onClose={() => setDismissedWarning(warning)}
         />
       )}
     </main>
